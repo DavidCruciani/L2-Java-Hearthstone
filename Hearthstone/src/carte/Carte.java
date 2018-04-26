@@ -37,11 +37,21 @@ public abstract class Carte implements ICarte {
 		return "Nom[ "+this.getNom()+" ], Cout[ "+this.getCout()+" ]";
 	}
 	
-	/*public boolean equals(Object o) {
-		if(this==o) return true;
-		if (o==null) return false;
-		if(!(o instanceof Carte)) return false;
-		Carte a=(Carte)o;
-		return (a.getNom().equals(this.getNom()) && a.getCout().equals(this.getCout()) );
-	}*/
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Carte other = (Carte) obj;
+		if (cout != other.cout)
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		return true;
+	} 
 }
