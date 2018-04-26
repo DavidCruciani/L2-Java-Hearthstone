@@ -26,5 +26,5 @@ public interface IJoueur {
     public abstract void piocher() throws HearthstoneException;
     public abstract void prendreTour();
     public abstract void utiliserCarte(ICarte carte, Object cible);
-    public abstract void utiliserPouvoir(Object cible);
+    public abstract void utiliserPouvoir(Object cible) throws HearthstoneException;
 }

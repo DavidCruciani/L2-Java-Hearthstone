@@ -11,11 +11,11 @@ public class Serviteur extends Carte{
 	private boolean peutJouer = true;
 	private ICapacite capacite;
 	
-	public Serviteur(String nom, int cout, IJoueur proprietaire, int attaque, int pdv, boolean attendre, ICapacite capacite) {
+	public Serviteur(String nom, int cout, IJoueur proprietaire, int attaque, int pdv,ICapacite capacite) {
 		super(nom,cout,proprietaire);
 		this.setAttaque(attaque);
 		this.setPointDeVie(pdv);
-		this.setAttendre(attendre);
+		attendre = true;
 		this.setCapacite(capacite);
 	}
 	

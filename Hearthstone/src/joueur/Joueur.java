@@ -7,7 +7,7 @@ import exception.HearthstoneException;
 import heros.Heros;
 import plateau.Plateau;
 
-/* A finir pour le pouvoir et revoir quand plateau fait */
+/* revoir quand plateau fait */
 
 public class Joueur implements IJoueur {
 	private String pseudo;
@@ -137,8 +137,12 @@ public class Joueur implements IJoueur {
 		}
 	}
 
-	public void utiliserPouvoir(Object cible) {
-
+	public void utiliserPouvoir(Object cible) throws HearthstoneException {
+		if(hero.getPouvoir() != null) {
+			hero.getPouvoir().executerAction(cible);
+		}
+		else
+			throw new HearthstoneException("Ton Hero est mauvais, il a pas de pouvoir");
 	}
 	
 	public String toString() {
