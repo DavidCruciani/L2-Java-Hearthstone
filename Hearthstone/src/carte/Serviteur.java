@@ -35,8 +35,14 @@ public class Serviteur extends Carte{
 	public void setAttaque(int attaque) {
 		this.attaque=attaque;
 	}
+	public void setAttaqueBonus(int attaqueBonus) {
+		this.attaque+=attaqueBonus;
+	}
 	public void setPointDeVie(int pdv) {
 		this.pdv=pdv;
+	}
+	public void setPointDeVieBonus(int pdvBonus) {
+		this.pdv+=pdvBonus;
 	}
 	public void setAttendre(boolean attendre) {
 		this.attendre=attendre;
