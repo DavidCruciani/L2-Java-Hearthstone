@@ -3,6 +3,8 @@ package joueur;
 import java.util.ArrayList;
 
 import carte.ICarte;
+import carte.Serviteur;
+import carte.Sort;
 import exception.HearthstoneException;
 import heros.Heros;
 import plateau.Plateau;
@@ -119,10 +121,17 @@ public class Joueur implements IJoueur {
 	 */
 	public void jouerCarte(ICarte carte, Object cible) throws HearthstoneException {
 		if(main.contains(carte) && this.getMana() - carte.getCout() >= 0) {
-			enJeu.add(carte);
-			main.remove(carte);
-			carte.executerEffetDebutMiseEnJeu(cible);
-			this.mana -= carte.getCout();
+			if(carte instanceof Serviteur) {
+				enJeu.add(carte);
+				main.remove(carte);
+				carte.executerEffetDebutMiseEnJeu(cible);
+				this.mana -= carte.getCout();
+			}
+			else if(carte instanceof Sort){
+				carte.executerEffetDebutMiseEnJeu(cible);
+				this.mana -= carte.getCout();
+				main.remove(carte);
+			}
 		}
 		else
 			throw new HearthstoneException("Carte pas en Main");
