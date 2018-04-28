@@ -5,6 +5,12 @@ import exception.HearthstoneException;
 import heros.Heros;
 import plateau.Plateau;
 
+/**
+ * AttaqueTotale est une classe issue de la classe Capacite
+ * Cette capacite permet au serviteur cible d attaquer tout les serviteurs adverse pose sur le plateau
+ * @author David Cruciani
+ * @see Capacite
+ */
 public class AttaqueTotale extends Capacite {
 	private int degas;
 	

@@ -4,6 +4,11 @@ import capacite.ICapacite;
 import exception.HearthstoneException;
 import joueur.IJoueur;
 
+/**
+ * Serviteur est une classe issue de la classe Carte
+ * @author David Cruciani
+ * @see Carte
+ */
 public class Serviteur extends Carte{
 	private int attaque;
 	private int pdv;
@@ -50,11 +55,18 @@ public class Serviteur extends Carte{
 	public void setCapacite(ICapacite capacite) {
 		this.capacite = capacite;
 	}
-	
+	/**
+	 * @return true si la vie de la carte est inferieur ou egale a 0
+	 */
 	public boolean disparait() {
 		return this.getPointDeVie()>=0;
 	}
 	
+	/**
+	 * 
+	 * @param attaque
+	 * 				degas que prend la carte lorsque elle est attaque
+	 */
 	public void estAttaquer(int attaque) {
 		if(this.getPointDeVie()-attaque > 0)
 			this.setPointDeVie(getAttaque()-attaque);
@@ -68,6 +80,12 @@ public class Serviteur extends Carte{
 				this.getPointDeVie() + " ] " ;
 	}	
 	
+	/**
+	 * @param cible
+	 * 				cible que le joueur veut atteindre
+	 * La carte effectue l action que lui confere sa capacite
+	 * si elle n est pas deja utilisee
+	 */
 	public void executerAction(Object cible) throws HearthstoneException {
 		if(this.getAttendre())
 			throw new HearthstoneException("Faut attendre un tour");

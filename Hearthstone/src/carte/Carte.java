@@ -2,6 +2,12 @@ package carte;
 
 import joueur.IJoueur;
 
+/**
+ * Carte est une classe representant une carte dans le jeu
+ * @author David Cruciani
+ *
+ */
+
 public abstract class Carte implements ICarte {
 	private String nom;
 	private int cout;

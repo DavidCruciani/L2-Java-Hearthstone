@@ -1,5 +1,6 @@
 package capacite;
 
+import carte.ICarte;
 import carte.Serviteur;
 import exception.HearthstoneException;
 import heros.Heros;
@@ -25,19 +26,25 @@ public class AttaqueCible extends Capacite {
 				throw new HearthstoneException("L'adversaire a une provocation");
 	
 			((Heros)cible).perdreVie(degas);
+			if( ((Heros)cible).estMort()) {
+				plateau.gagnePartie(plateau.getJoueurCourant());
+			}
 		}
 		if(cible instanceof Serviteur) {
 			if(aProvocation()) 
 				throw new HearthstoneException("L'adversaire a une provocation");
 			
 			((Serviteur)cible).estAttaquer(degas);
+			if( ((Serviteur)cible).disparait() ) {
+				plateau.getAdversaire(plateau.getJoueurCourant()).perdreCarte( ((ICarte)cible) );
+			}
 		}
 		setDejaUtilise(true);
 			
 	}
 	
 	public boolean aProvocation() {
-		for(Serviteur carte : plateau.getAdversaire().getJeu() ) {
+		for(Serviteur carte : plateau.getAdversaire(plateau.getJoueurCourant()).getJeu() ) {
 			if(carte.getCapacite() instanceof Provocation)
 				return false;
 		}

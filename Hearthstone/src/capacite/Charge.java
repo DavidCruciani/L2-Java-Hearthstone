@@ -2,6 +2,13 @@ package capacite;
 
 import carte.Serviteur;
 
+/**
+ * Charge est une classe issue de la classe Capacite
+ * Cette capacite permet au serviteur cible de ne pas attendre pour attaquer lors de sa mise en jeu
+ * @author David Cruciani
+ * @see Capacite
+ */
+
 public class Charge extends Capacite {
 
 	public Charge() {
@@ -10,14 +17,7 @@ public class Charge extends Capacite {
 
 	
 	public void executerAction(Object cible) {
-		if(cible == null)
-			throw new IllegalArgumentException("Ta pas de cible");
-		if(getDejaUtilise())
-			throw new IllegalArgumentException("Capacite deja utilise");
-		if(!(cible instanceof Serviteur))
-			throw new IllegalArgumentException("C'est pas un serviteur que tu vise");
-		((Serviteur)cible).setAttendre(false);
-		setDejaUtilise(true);
+		
 	}
 
 	public void executerEffetDebutTour() {
@@ -33,7 +33,12 @@ public class Charge extends Capacite {
 	}
 
 	public void executerEffetMiseEnJeu(Object cible) {
-		
+		if(cible == null)
+			throw new IllegalArgumentException("Ta pas de cible");
+		if(!(cible instanceof Serviteur))
+			throw new IllegalArgumentException("C'est pas un serviteur que tu vise");
+		((Serviteur)cible).setAttendre(false);
+		setDejaUtilise(true);
 	}
 	
 }

@@ -2,6 +2,12 @@ package heros;
 
 import capacite.ICapacite;
 
+/**
+ * Heros est une classe representant un hero du jeu
+ * @author David Cruciani
+ */
+
+
 public class Heros {
 	public static final int VIE_MAX=15;
 	
@@ -14,7 +20,11 @@ public class Heros {
 		this.setPouvoir(pouvoir);
 		this.vie=15;
 	}
-	
+	/**
+	 * constructeur dans le cas ou le hero a pas de capacite
+	 * @param nom
+	 * 			 nom du Heros choisie
+	 */
 	public Heros(String nom) {
 		this.setNom(nom);
 		this.pouvoir=null;
@@ -46,10 +56,19 @@ public class Heros {
 		this.vie=vie;
 	}
 	
+	/**
+	 * Met la vie du Hero à jour apres avoir subit une attaque 
+	 * @param degat
+	 * 			   vie enleve au Hero
+	 */
 	public void perdreVie(int degat) {
 		this.setVie(this.getVie()-degat);
 	}
 	
+	/**
+	 * 
+	 * @return true si la vie du Hero est inferieur ou egale à 0
+	 */
 	public boolean estMort() {
 		return this.getVie()>=0;
 	}

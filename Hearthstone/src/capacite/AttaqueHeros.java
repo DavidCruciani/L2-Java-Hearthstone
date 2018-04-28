@@ -2,6 +2,13 @@ package capacite;
 
 import heros.Heros;
 
+/**
+ * AttaqueHeros est une classe issue de la classe Capacite
+ * Cette capacite permet au serviteur cible d attaquer le Hero adverse
+ * meme si celui ci possede une provocation en jeu
+ * @author David Cruciani
+ * @see Capacite
+ */
 public class AttaqueHeros extends Capacite {
 
 	private int degas;

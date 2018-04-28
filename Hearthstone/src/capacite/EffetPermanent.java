@@ -5,6 +5,12 @@ import exception.HearthstoneException;
 import heros.Heros;
 import plateau.Plateau;
 
+/**
+ * EffetPermanent est une classe issue de la classe Capacite
+ * Cette capacite permet au serviteur cible de percevoir un bonus d attaque et de vie
+ * @author David Cruciani
+ * @see Capacite
+ */
 public class EffetPermanent extends Capacite {
 	private int vieBonus;
 	private int attaqueBonus;
@@ -32,6 +38,10 @@ public class EffetPermanent extends Capacite {
 		
 	}
 
+	/**
+	 * Lorsque la carte possedant cette capacite disparait, le bonus disparait aussi
+	 * il faut enlever alors les bonus ajoute a la carte qui les a eux
+	 */
 	public void executerEffetDisparition(Object cible) {
 		if(cible == null)
 			throw new IllegalArgumentException("Ta pas de cible");
@@ -51,7 +61,10 @@ public class EffetPermanent extends Capacite {
 	public void executerEffetFinTour() {
 	
 	}
-
+	
+	/**
+	 * Lorsque la carte possedant cette capacite est mise en jeu, le bonus est mis sur un serviteur
+	 */
 	public void executerEffetMiseEnJeu(Object cible) {
 		if(cible == null)
 			throw new IllegalArgumentException("Ta pas de cible");
