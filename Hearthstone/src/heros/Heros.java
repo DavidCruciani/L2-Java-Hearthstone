@@ -96,6 +96,6 @@ public class Heros {
 		if (vie != other.vie)
 			return false;
 		return true;
-}
+	}
 	
 }

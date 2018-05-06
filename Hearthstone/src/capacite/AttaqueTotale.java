@@ -1,5 +1,6 @@
 package capacite;
 
+import carte.ICarte;
 import carte.Serviteur;
 import exception.HearthstoneException;
 import heros.Heros;
@@ -27,8 +28,8 @@ public class AttaqueTotale extends Capacite {
 		if(cible instanceof Heros) {
 				throw new HearthstoneException("Tu dois choisir un serviteur");
 		}
-		for(Serviteur carte : plateau.getAdversaire().getJeu() )
-			((Serviteur)cible).estAttaquer(degas);
+		for(ICarte carte : Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu() )
+			((Serviteur) carte).estAttaquer(degas);
 		
 		setDejaUtilise(true);
 	}

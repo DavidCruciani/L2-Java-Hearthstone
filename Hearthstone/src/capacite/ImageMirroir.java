@@ -11,7 +11,7 @@ import plateau.Plateau;
  */
 public class ImageMirroir extends InvocationServiteur {
 	public ImageMirroir(String nom, String description, Serviteur invocation) {
-		super(nom,description, new Serviteur("Mirroir","",plateau.getJoueurCourant() ,0,2, new Provocation() ) );
+		super(nom,description, new Serviteur("Mirroir",0,Plateau.plateau().getJoueurCourant() ,0,2, new Provocation() ) );
 	}
 	
 	/**
@@ -20,6 +20,6 @@ public class ImageMirroir extends InvocationServiteur {
 	 * Invoque un serviteur au joueur courant
 	 */
 	public void executerEffetMiseEnJeu(Object cible) {
-		plateau.getJoueurCourant().getJeu().add(this.getInvocation());
+		Plateau.plateau().getJoueurCourant().getJeu().add(this.getInvocation());
 	}
 }

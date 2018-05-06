@@ -1,8 +1,7 @@
 package capacite;
 
-import carte.Serviteur;
 import exception.HearthstoneException;
-import heros.Heros;
+import plateau.Plateau;
 
 /**
  * Pioche est une classe issue de la classe Capacite
@@ -37,7 +36,7 @@ public class Pioche extends Capacite {
 		public void executerEffetMiseEnJeu(Object cible) {
 			for(int i=1;i<=nombreCarte;i++) {
 				try {
-					plateau.getJoueurCourant().piocher();
+					Plateau.plateau().getJoueurCourant().piocher();
 				}
 				catch(HearthstoneException e) {
 					e.printStackTrace();

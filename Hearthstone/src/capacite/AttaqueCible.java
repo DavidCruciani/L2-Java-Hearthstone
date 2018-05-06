@@ -27,7 +27,7 @@ public class AttaqueCible extends Capacite {
 	
 			((Heros)cible).perdreVie(degas);
 			if( ((Heros)cible).estMort()) {
-				plateau.gagnePartie(plateau.getJoueurCourant());
+				Plateau.plateau().gagnePartie(Plateau.plateau().getJoueurCourant());
 			}
 		}
 		if(cible instanceof Serviteur) {
@@ -36,16 +36,16 @@ public class AttaqueCible extends Capacite {
 			
 			((Serviteur)cible).estAttaquer(degas);
 			if( ((Serviteur)cible).disparait() ) {
-				plateau.getAdversaire(plateau.getJoueurCourant()).perdreCarte( ((ICarte)cible) );
+				Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).perdreCarte( ((ICarte)cible) );
 			}
 		}
 		setDejaUtilise(true);
 			
 	}
 	
-	public boolean aProvocation() {
-		for(Serviteur carte : plateau.getAdversaire(plateau.getJoueurCourant()).getJeu() ) {
-			if(carte.getCapacite() instanceof Provocation)
+	public boolean aProvocation() throws HearthstoneException {
+		for(ICarte carte : Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu() ) {
+			if(((Serviteur) carte).getCapacite() instanceof Provocation)
 				return false;
 		}
 		return true;

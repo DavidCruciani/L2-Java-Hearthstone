@@ -2,7 +2,7 @@ package capacite;
 
 import carte.Serviteur;
 import exception.HearthstoneException;
-import heros.Heros;
+import plateau.Plateau;
 
  /**
   * MarqueChasseur est une classe issue de Capacite
@@ -28,8 +28,8 @@ public class MarqueChasseur extends Capacite {
 		if( !(cible instanceof Serviteur) ) 
 			throw new HearthstoneException("Vise un serviteur");
 		else {
-			if(plateau.getAdversaire( plateau.getJoueurCourant() ).getJeu.contains( ( (Serviteur)cible) ) )
-				plateau.getAdversaire( plateau.getJoueurCourant() ).getCarteEnJeu( (String)cible) ).setPointDeVie(1);
+			if(Plateau.plateau().getAdversaire( Plateau.plateau().getJoueurCourant() ).getJeu().contains( ( (Serviteur)cible) ) )
+				((Serviteur) Plateau.plateau().getAdversaire( Plateau.plateau().getJoueurCourant() ).getCarteEnJeu( (String)cible )).setPointDeVie(1);
 			else
 				throw new HearthstoneException("Ta cible existe pas");
 		}

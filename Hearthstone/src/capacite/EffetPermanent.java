@@ -41,8 +41,9 @@ public class EffetPermanent extends Capacite {
 	/**
 	 * Lorsque la carte possedant cette capacite disparait, le bonus disparait aussi
 	 * il faut enlever alors les bonus ajoute a la carte qui les a eux
+	 * @throws HearthstoneException 
 	 */
-	public void executerEffetDisparition(Object cible) {
+	public void executerEffetDisparition(Object cible) throws HearthstoneException {
 		if(cible == null)
 			throw new IllegalArgumentException("Ta pas de cible");
 		if(!(cible instanceof Heros) && !(cible instanceof Serviteur))
@@ -53,8 +54,8 @@ public class EffetPermanent extends Capacite {
 			if(cible != this.getCarteCible()) {
 				throw new IllegalArgumentException("Tu dois viser le même serviteur que toute a lheure");
 			}
-			plateau.getJoueurCourant().getCarteEnJeu( ( (String)cible) ).setPointDeVieBonus(-this.vieBonus);
-			plateau.getJoueurCourant().getCarteEnJeu( ( (String)cible) ).setAttaqueBonus(-this.attaqueBonus);
+			((Serviteur) Plateau.plateau().getJoueurCourant().getCarteEnJeu( ( (String)cible) )).setPointDeVieBonus(-this.vieBonus);
+			((Serviteur) Plateau.plateau().getJoueurCourant().getCarteEnJeu( ( (String)cible) )).setAttaqueBonus(-this.attaqueBonus);
 		}
 	}
 
@@ -64,8 +65,9 @@ public class EffetPermanent extends Capacite {
 	
 	/**
 	 * Lorsque la carte possedant cette capacite est mise en jeu, le bonus est mis sur un serviteur
+	 * @throws HearthstoneException 
 	 */
-	public void executerEffetMiseEnJeu(Object cible) {
+	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
 		if(cible == null)
 			throw new IllegalArgumentException("Ta pas de cible");
 		if(getDejaUtilise())
@@ -76,8 +78,8 @@ public class EffetPermanent extends Capacite {
 			throw new IllegalArgumentException("Tu dois viser un serviteur");
 		if(cible instanceof Serviteur) {
 			setCarteCible( ( (String)cible ) );
-			plateau.getJoueurCourant().getCarteEnJeu( ( (String)cible) ).setPointDeVieBonus(this.vieBonus);
-			plateau.getJoueurCourant().getCarteEnJeu( ( (String)cible) ).setAttaqueBonus(this.attaqueBonus);
+			((Serviteur) Plateau.plateau().getJoueurCourant().getCarteEnJeu( ( (String)cible) )).setPointDeVieBonus(this.vieBonus);
+			((Serviteur) Plateau.plateau().getJoueurCourant().getCarteEnJeu( ( (String)cible) )).setAttaqueBonus(this.attaqueBonus);
 		}
 	}
 	

@@ -1,6 +1,7 @@
 package capacite;
 
 import carte.Serviteur;
+import exception.HearthstoneException;
 import plateau.Plateau;
 
 /**
@@ -41,8 +42,9 @@ public class InvocationServiteur extends Capacite {
 	 * @param cible
 	 * 				cible que le joueur veut atteindre
 	 * Invoque un serviteur au joueur courant
+	 * @throws HearthstoneException 
 	 */
-	public void executerEffetMiseEnJeu(Object cible) {
-		plateau.getJoueurCourant().getJeu().add(this.getInvocation());
+	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
+		Plateau.plateau().getJoueurCourant().getJeu().add(this.getInvocation());
 	}
 }

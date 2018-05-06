@@ -60,12 +60,13 @@ public class Joueur implements IJoueur {
 	/**
 	 * Le joueur a fait toute les actions qu il a souhaite et passe la main a l adversaire
 	 * les capacites de fin de tour des cartes posees en jeu sont activees
+	 * @throws HearthstoneException 
 	 */
-	public void finirTour() {
+	public void finirTour() throws HearthstoneException {
 		for (ICarte carte : this.enJeu) {
 			carte.executerEffetFinTour();
 		}
-		plateau.finTour(this);
+		Plateau.plateau().finTour(this);
 	}
 
 	/**
@@ -164,8 +165,9 @@ public class Joueur implements IJoueur {
 
 	/**
 	 * Le joueur commence a jouer son tour
+	 * @throws HearthstoneException 
 	 */
-	public void prendreTour() {
+	public void prendreTour() throws HearthstoneException {
 		if(this.mana + 1 < MAX_MANA) {
 			this.mana ++;
 			this.stockMana = mana;
@@ -177,7 +179,7 @@ public class Joueur implements IJoueur {
 			e.printStackTrace();
 		}
 		
-		Plateau.setJoueurCourant(this);
+		Plateau.plateau().setJoueurCourant(this);
 	}
 
 	/**

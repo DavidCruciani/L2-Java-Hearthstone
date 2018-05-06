@@ -107,11 +107,11 @@ public class Serviteur extends Carte{
 		this.getCapacite().executerEffetFinTour();
 	}
 
-	public void executerEffetDebutMiseEnJeu(Object cible) {
+	public void executerEffetDebutMiseEnJeu(Object cible) throws HearthstoneException {
 		this.getCapacite().executerEffetMiseEnJeu(cible);
 	}
 
-	public void executerEffetDisparition(Object cible) {
+	public void executerEffetDisparition(Object cible) throws HearthstoneException {
 		this.getCapacite().executerEffetDisparition(cible);
 	}
 }

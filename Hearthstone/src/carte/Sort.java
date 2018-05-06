@@ -41,7 +41,7 @@ public class Sort extends Carte {
 		
 	}
 
-	public void executerEffetDebutMiseEnJeu(Object cible) {
+	public void executerEffetDebutMiseEnJeu(Object cible) throws HearthstoneException {
 		this.capacite.executerEffetMiseEnJeu(cible);
 	}
 

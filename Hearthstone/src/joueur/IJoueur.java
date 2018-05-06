@@ -11,7 +11,7 @@ public interface IJoueur {
 	public static final int MAX_MANA = 10;
 	public static final int TAILLE_DECK=15;
 
- 	public abstract void finirTour();
+ 	public abstract void finirTour() throws HearthstoneException;
     public abstract ICarte getCarteEnJeu(String nomCarte) throws HearthstoneException;
     public abstract ICarte getCarteEnMain(String nomCarte) throws HearthstoneException;
     public abstract Heros getHeros();
@@ -24,7 +24,7 @@ public interface IJoueur {
     public abstract void jouerCarte(ICarte carte, Object cible) throws HearthstoneException;
     public abstract void perdreCarte(ICarte carte) throws HearthstoneException;
     public abstract void piocher() throws HearthstoneException;
-    public abstract void prendreTour();
+    public abstract void prendreTour() throws HearthstoneException;
     public abstract void utiliserCarte(ICarte carte, Object cible);
     public abstract void utiliserPouvoir(Object cible) throws HearthstoneException;
 }
