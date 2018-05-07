@@ -59,7 +59,7 @@ public class Serviteur extends Carte{
 	 * @return true si la vie de la carte est inferieur ou egale a 0
 	 */
 	public boolean disparait() {
-		return this.getPointDeVie()>=0;
+		return this.getPointDeVie()<=0;
 	}
 	
 	/**

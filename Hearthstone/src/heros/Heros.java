@@ -70,7 +70,7 @@ public class Heros {
 	 * @return true si la vie du Hero est inferieur ou egale à 0
 	 */
 	public boolean estMort() {
-		return this.getVie()>=0;
+		return this.getVie()<=0;
 	}
 	
 	public String toString() {

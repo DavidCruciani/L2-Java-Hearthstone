@@ -46,9 +46,9 @@ public class AttaqueCible extends Capacite {
 	public boolean aProvocation() throws HearthstoneException {
 		for(ICarte carte : Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu() ) {
 			if(((Serviteur) carte).getCapacite() instanceof Provocation)
-				return false;
+				return true;
 		}
-		return true;
+		return false;
 			
 	}
 	
