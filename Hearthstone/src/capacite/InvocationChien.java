@@ -12,7 +12,7 @@ import capacite.Charge;
  * @see InvocationServiteur
  */
 public class InvocationChien extends InvocationServiteur{
-	public InvocationChien(String nom, String description, Serviteur invocation) {
+	public InvocationChien(String nom, String description) {
 		super(nom,description, new Serviteur("Chiens",0,Plateau.plateau().getJoueurCourant() ,1,1, new Charge() ) );
 	}
 	

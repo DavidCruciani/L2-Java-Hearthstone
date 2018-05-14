@@ -51,7 +51,7 @@ public class Sort extends Carte {
 
 	public String toString()
 	{
-		return "Sort [ " + super.toString() + "capacite = " + this.getCapacite() + " ] ";
+		return "Sort [ " + super.toString() + ", Capacite " + this.getCapacite() + " ] \n";
 	}	
 	
 }

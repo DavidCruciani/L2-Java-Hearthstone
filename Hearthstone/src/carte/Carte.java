@@ -40,7 +40,7 @@ public abstract class Carte implements ICarte {
 	}
 	
 	public String toString() {
-		return "Nom[ "+this.getNom()+" ], Cout[ "+this.getCout()+" ]";
+		return "Nom = "+this.getNom()+", Cout = "+this.getCout();
 	}
 	
 	public boolean equals(Object obj) {

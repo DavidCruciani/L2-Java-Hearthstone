@@ -76,8 +76,8 @@ public class Serviteur extends Carte{
 	
 	public String toString()
 	{
-		return " Serviteur [ " + super.toString() + "attaque = " + this.getAttaque() + " vie = " + 
-				this.getPointDeVie() + " ] " ;
+		return "Serviteur [ " + super.toString() + ", Capacite " + this.getCapacite() + ", Attaque = " + this.getAttaque() + ", Vie = " + 
+				this.getPointDeVie() + " ] \n" ;
 	}	
 	
 	/**

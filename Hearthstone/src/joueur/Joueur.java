@@ -45,6 +45,9 @@ public class Joueur implements IJoueur {
 	public ArrayList<ICarte> getJeu(){
 		return this.enJeu;
 	}
+	public ArrayList<ICarte> getDeck(){
+		return this.deck;
+	}
 	public Heros getHeros()
 	{
 		return this.hero;
@@ -67,6 +70,16 @@ public class Joueur implements IJoueur {
 			carte.executerEffetFinTour();
 		}
 		Plateau.plateau().finTour(this);
+	}
+	
+	public void setDeck(ArrayList<ICarte> deck) throws HearthstoneException {
+		
+		if(Plateau.plateau().estDemaree())
+			throw new HearthstoneException("La partie est en cours ");
+		if(deck==null)
+			throw new HearthstoneException("Le deck a ajouter ne doit pas être null");
+		this.deck=deck;
+
 	}
 
 	/**

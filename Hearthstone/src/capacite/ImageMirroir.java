@@ -10,7 +10,7 @@ import plateau.Plateau;
  * @see InvocationServiteur
  */
 public class ImageMirroir extends InvocationServiteur {
-	public ImageMirroir(String nom, String description, Serviteur invocation) {
+	public ImageMirroir(String nom, String description) {
 		super(nom,description, new Serviteur("Mirroir",0,Plateau.plateau().getJoueurCourant() ,0,2, new Provocation() ) );
 	}
 	

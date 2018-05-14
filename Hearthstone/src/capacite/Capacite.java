@@ -16,11 +16,6 @@ public abstract class Capacite implements ICapacite {
 	}
 	
 	public String getNom() {
-		if(nom == null)
-			throw new IllegalArgumentException("Le nom doit pas etre nul");
-		if(nom == "") {
-			throw new IllegalArgumentException("Le nom doit pas etre vide");
-		}
 		return this.nom;
 	}
 	public String getDescription() {
@@ -31,6 +26,11 @@ public abstract class Capacite implements ICapacite {
 	}
 	
 	public void setNom(String nom) {
+		if(nom == null)
+			throw new IllegalArgumentException("Le nom doit pas etre nul");
+		if(nom == "") {
+			throw new IllegalArgumentException("Le nom doit pas etre vide");
+		}
 		this.nom=nom;
 	}
 	public void setDescription(String description) {
@@ -41,6 +41,6 @@ public abstract class Capacite implements ICapacite {
 	}
 	
 	public String toString() {
-		return "Nom[ "+this.getNom()+" ], Description[ "+this.getDescription()+" ]";
+		return "[ Nom = "+this.getNom()+", Description = "+this.getDescription()+" ]";
 	}
 }
