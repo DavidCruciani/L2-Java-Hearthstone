@@ -109,7 +109,16 @@ public class Main {
 		((Joueur) joueur1).getDeck().addAll(CartesNeutres(joueur1));
 		((Joueur) joueur2).getDeck().addAll(CartesNeutres(joueur2));
 		
-		for(ICarte carte  : ((Joueur) joueur1).getDeck()) {
+		ICarte mirroir=new Sort ("Image mirroir", 1, joueur2, new ImageMirroir("Image Mirroir", "Invoque deux serviteurs de Jaina 0/+2 ayant provocation"));
+		joueur2.getMain().add(mirroir);
+		
+		for(ICarte carte  : ((Joueur) joueur2).getMain()) {
+			System.out.println(carte.toString());
+		}
+		System.out.println(joueur2.getCarteEnMain("Image mirroir").toString());
+		
+		((Joueur)joueur2).jouerCarte(mirroir);
+		for(ICarte carte  : ((Joueur) joueur2).getJeu()) {
 			System.out.println(carte.toString());
 		}
 	}

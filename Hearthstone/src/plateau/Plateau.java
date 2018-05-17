@@ -122,12 +122,16 @@ public class Plateau implements IPlateau{
 	 * @return les infos sur la partie, sur le joueur courant
 	 */
 	public String toString() {
-		if this.estDemaree()
-			partie = "est demarrée";
-			else
-				partie= "n'est pas demarrée";
-		return plateau = "Cette partie " + partie + this.getJoueurCourant() " affronte" + this.getAdversaire(this.getJoueurCourant())"; C'est à vous : "+this.getJoueurCourant().toString();
-		
+		String partie = null;
+		if (this.estDemaree())
+			try {
+				partie = "Cette partie est démarée" + this.getJoueurCourant() + " affronte" + this.getAdversaire(this.getJoueurCourant()) + "; C'est à vous : "+this.getJoueurCourant().toString();
+			} catch (HearthstoneException e) {
+				e.printStackTrace();
+			}
+		else
+			partie = "Cette partie n'est pas demarrée";
+		return partie;
 	}
 
 }

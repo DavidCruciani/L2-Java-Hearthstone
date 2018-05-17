@@ -18,7 +18,7 @@ import plateau.Plateau;
 
 public class Joueur implements IJoueur {
 	private String pseudo;
-	private int mana = 0;
+	private int mana = 1;
 	private int stockMana = 0;
 	private ArrayList<ICarte> deck = new ArrayList<ICarte>();
 	private ArrayList<ICarte> main = new ArrayList<ICarte>();
@@ -115,13 +115,16 @@ public class Joueur implements IJoueur {
 	 * si elle existe bien dans sa main et si il a le mana pour le faire
 	 */
 	public void jouerCarte(ICarte carte) throws HearthstoneException {
-		if(main.contains(carte) && this.getMana() - carte.getCout() > 0) {
-			enJeu.add(carte);
-			main.remove(carte);
-			this.mana -= carte.getCout();
+		if( main.contains(carte) ){
+			if(this.getMana() >= carte.getCout()) {
+				enJeu.add(carte);
+				main.remove(carte);
+				this.mana -= carte.getCout();
+			}
+			else throw new HearthstoneException("Pas mana");
 		}
 		else
-			throw new HearthstoneException("Carte pas en Main");
+			throw new HearthstoneException("2 Carte pas en Main");
 	}
 
 	/**
