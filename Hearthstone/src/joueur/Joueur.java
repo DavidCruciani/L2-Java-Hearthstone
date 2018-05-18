@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import carte.ICarte;
 import carte.Serviteur;
 import carte.Sort;
+import exception.CapaciteException;
 import exception.HearthstoneException;
 import heros.Heros;
 import plateau.Plateau;
@@ -18,7 +19,7 @@ import plateau.Plateau;
 
 public class Joueur implements IJoueur {
 	private String pseudo;
-	private int mana = 1;
+	private int mana = 0;
 	private int stockMana = 0;
 	private ArrayList<ICarte> deck = new ArrayList<ICarte>();
 	private ArrayList<ICarte> main = new ArrayList<ICarte>();
@@ -64,12 +65,12 @@ public class Joueur implements IJoueur {
 	 * Le joueur a fait toute les actions qu il a souhaite et passe la main a l adversaire
 	 * les capacites de fin de tour des cartes posees en jeu sont activees
 	 * @throws HearthstoneException 
+	 * @throws CapaciteException 
 	 */
-	public void finirTour() throws HearthstoneException {
+	public void finirTour() throws HearthstoneException, CapaciteException {
 		for (ICarte carte : this.enJeu) {
 			carte.executerEffetFinTour();
 		}
-		Plateau.plateau().finTour(this);
 	}
 	
 	public void setDeck(ArrayList<ICarte> deck) throws HearthstoneException {
@@ -89,7 +90,7 @@ public class Joueur implements IJoueur {
 	 */
 	public ICarte getCarteEnJeu(String nomCarte) throws HearthstoneException {
 			for (ICarte carte : this.enJeu) {
-				if(carte.getNom().equals(nomCarte)) 
+				if(carte.getNom().contains(nomCarte)) 
 					return carte;
 			}
 			throw new HearthstoneException("Carte pas en Jeu");
@@ -102,7 +103,7 @@ public class Joueur implements IJoueur {
 	 */
 	public ICarte getCarteEnMain(String nomCarte) throws HearthstoneException {
 		for (ICarte carte : this.main) {
-			if(carte.getNom().equals(nomCarte)) 
+			if(carte.getNom().contains(nomCarte)) 
 				return carte;
 		}
 		throw new HearthstoneException("Carte pas en Main");
@@ -113,18 +114,23 @@ public class Joueur implements IJoueur {
 	 * 				nom de la carte qu on veut jouer
 	 * le joueur pose la carte de sa main sur le plateau 
 	 * si elle existe bien dans sa main et si il a le mana pour le faire
+	 * @throws CapaciteException 
 	 */
-	public void jouerCarte(ICarte carte) throws HearthstoneException {
-		if( main.contains(carte) ){
-			if(this.getMana() >= carte.getCout()) {
-				enJeu.add(carte);
-				main.remove(carte);
-				this.mana -= carte.getCout();
-			}
-			else throw new HearthstoneException("Pas mana");
+	public void jouerCarte(ICarte carte) throws HearthstoneException, CapaciteException {
+		if(!main.contains(carte)) throw new HearthstoneException("Carte pas en Main");
+		if(!(this.getMana() >= carte.getCout())) throw new HearthstoneException("Pas mana");
+		enJeu.add(carte);
+		main.remove(carte);
+		this.mana -= carte.getCout();
+		try {
+			carte.executerEffetDebutMiseEnJeu(null);
 		}
-		else
-			throw new HearthstoneException("2 Carte pas en Main");
+		catch (HearthstoneException e) {
+			this.mana = this.mana + carte.getCout();
+			this.main.add(carte);
+			this.getJeu().remove(carte);
+			throw new HearthstoneException("Pas de cible");
+		}
 	}
 
 	/**
@@ -135,19 +141,22 @@ public class Joueur implements IJoueur {
 	 * le joueur pose la carte de sa main sur le plateau 
 	 * si elle existe bien dans sa main et si il a le mana pour le faire
 	 * et active sa capacite de mise en jeu sur la cible choisie
+	 * @throws CapaciteException 
 	 */
-	public void jouerCarte(ICarte carte, Object cible) throws HearthstoneException {
-		if(main.contains(carte) && this.getMana() - carte.getCout() >= 0) {
-			if(carte instanceof Serviteur) {
-				enJeu.add(carte);
-				main.remove(carte);
-				carte.executerEffetDebutMiseEnJeu(cible);
-				this.mana -= carte.getCout();
-			}
-			else if(carte instanceof Sort){
-				carte.executerEffetDebutMiseEnJeu(cible);
-				this.mana -= carte.getCout();
-				main.remove(carte);
+	public void jouerCarte(ICarte carte, Object cible) throws HearthstoneException, CapaciteException {
+		if( main.contains(carte) ){
+			if(this.getMana() >= carte.getCout()) {
+				if(carte instanceof Serviteur) {
+					enJeu.add(carte);
+					main.remove(carte);
+					carte.executerEffetDebutMiseEnJeu(cible);
+					this.mana -= carte.getCout();
+				}
+				else if(carte instanceof Sort){
+					carte.executerEffetDebutMiseEnJeu(cible);
+					this.mana -= carte.getCout();
+					main.remove(carte);
+				}
 			}
 		}
 		else
@@ -210,14 +219,14 @@ public class Joueur implements IJoueur {
 			try {
 				carte.executerAction(cible);
 			}
-			catch(HearthstoneException e) {
+			catch(HearthstoneException | CapaciteException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
 
-	public void utiliserPouvoir(Object cible) throws HearthstoneException {
+	public void utiliserPouvoir(Object cible) throws HearthstoneException, CapaciteException {
 		if(hero.getPouvoir() != null) {
 			hero.getPouvoir().executerAction(cible);
 		}

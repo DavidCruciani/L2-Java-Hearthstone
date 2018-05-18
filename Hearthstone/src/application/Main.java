@@ -17,11 +17,16 @@ import carte.ICarte;
 import carte.Serviteur;
 import joueur.IJoueur;
 import joueur.Joueur;
+import plateau.Plateau;
 import carte.Sort;
+import menu.*;
 import exception.HearthstoneException;
 import heros.Heros;
 
 public class Main {
+	
+	private	static Interface ihm = null;
+	public final static Console es = new Console();
 	
 	public static ArrayList<ICarte> CarteJaina(IJoueur proprietaire)
 	{
@@ -99,7 +104,7 @@ public class Main {
 	
 	
 	public static void main(String[] args) throws HearthstoneException {
-		/*Creation des 2 joueurs*/
+		// Création des joueurs
 		IJoueur joueur1=new Joueur("Joueur 1 " , new Heros("Rexxar" , new AttaqueCible ("Tir assuré ","Inflige 2 points de degats à la cible", 2)) );
 		IJoueur joueur2=new Joueur ( "Joueur 2" , new Heros("Jaina",new AttaqueCible("Boule de feu","Inflige 1 point de degat à la cible", 1)));
 		
@@ -109,17 +114,68 @@ public class Main {
 		((Joueur) joueur1).getDeck().addAll(CartesNeutres(joueur1));
 		((Joueur) joueur2).getDeck().addAll(CartesNeutres(joueur2));
 		
-		ICarte mirroir=new Sort ("Image mirroir", 1, joueur2, new ImageMirroir("Image Mirroir", "Invoque deux serviteurs de Jaina 0/+2 ayant provocation"));
-		joueur2.getMain().add(mirroir);
-		
-		for(ICarte carte  : ((Joueur) joueur2).getMain()) {
-			System.out.println(carte.toString());
+		// Création plateau
+		try {
+		Plateau.plateau().ajouterJoueur(joueur1);
 		}
-		System.out.println(joueur2.getCarteEnMain("Image mirroir").toString());
-		
-		((Joueur)joueur2).jouerCarte(mirroir);
-		for(ICarte carte  : ((Joueur) joueur2).getJeu()) {
-			System.out.println(carte.toString());
+		catch (HearthstoneException e) {
+			e.printStackTrace();
 		}
+		try {
+			Plateau.plateau().ajouterJoueur(joueur2);
+			}
+			catch (HearthstoneException e) {
+				e.printStackTrace();
+			}
+		
+		Plateau.plateau().demarrerPartie();
+		Plateau.plateau().setJoueurCourant(joueur1);
+		
+		// Création menu
+		ihm = initialiserInterfaces();
+		
+		if (ihm==null) {
+			System.out.println("L'application ne sais rien faire....");
+			System.exit(0);
+		}	
+		
+		while (true) {
+			System.out.println(Plateau.plateau().toString());
+			String choix = menu();
+			try {
+				ihm.interagir(choix, Plateau.plateau());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	private static String menu() {
+		ArrayList<String>	menu = new ArrayList<String>();
+		Interface i = ihm;
+		while (i != null) {
+			menu.add(i.getDescription());
+			i = i.getSuivant();
+		}
+		
+		int n = 1;
+		for (String s : menu) {
+			es.println(""+n+". "+s);
+			n++;
+		}
+		
+		es.println("");
+		es.println("Votre choix : ");
+		int choix = es.readInt();
+		
+		return menu.get(choix-1);
+	}
+
+	private static Interface initialiserInterfaces() {
+		Interface monInterface = null;
+		monInterface = new InterfaceQuitter(monInterface);
+		monInterface = new InterfaceFinirTour(monInterface);
+		return monInterface;
 	}
 }

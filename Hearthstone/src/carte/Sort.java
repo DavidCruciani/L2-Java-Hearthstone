@@ -1,6 +1,7 @@
 package carte;
 
 import capacite.ICapacite;
+import exception.CapaciteException;
 import exception.HearthstoneException;
 import joueur.IJoueur;
 
@@ -29,19 +30,20 @@ public class Sort extends Carte {
 		return true;
 	}
 	
-	public void executerAction(Object cible) throws HearthstoneException {
+	public void executerAction(Object cible) throws CapaciteException {
+		throw new CapaciteException("Pas d'action a executer");
+	}
+	
+	public void executerEffetDebutTour(Object cible) throws CapaciteException {
+		throw new CapaciteException("Pas d'effet de début de tour");
 		
 	}
 	
-	public void executerEffetDebutTour(Object cible) {
-		
-	}
-	
-	public void executerEffetFinTour() {
-		
+	public void executerEffetFinTour() throws CapaciteException {
+		throw new CapaciteException("Pas d'effet de fin de tour");		
 	}
 
-	public void executerEffetDebutMiseEnJeu(Object cible) throws HearthstoneException {
+	public void executerEffetDebutMiseEnJeu(Object cible) throws HearthstoneException, CapaciteException {
 		this.capacite.executerEffetMiseEnJeu(cible);
 	}
 

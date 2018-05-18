@@ -2,6 +2,7 @@ package capacite;
 
 import carte.ICarte;
 import carte.Serviteur;
+import exception.CapaciteException;
 import exception.HearthstoneException;
 import plateau.Plateau;
 
@@ -21,11 +22,12 @@ public class EffetPermanent extends Capacite {
 		this.attaqueBonus=attaqueBonus;
 	}
 	
-	public void executerAction(Object cible) throws HearthstoneException {
-		
+	public void executerAction(Object cible) throws CapaciteException {
+		throw new CapaciteException("Pas d'action à executer");
 	}
 	
-	public void executerEffetDebutTour() {
+	public void executerEffetDebutTour() throws CapaciteException {
+		throw new CapaciteException("Pas d'effet de début de tour");
 		
 	}
 
@@ -41,7 +43,8 @@ public class EffetPermanent extends Capacite {
 		}
 	}
 
-	public void executerEffetFinTour() {
+	public void executerEffetFinTour() throws CapaciteException {
+		throw new CapaciteException("Pas d'effet de fin de tour");
 	
 	}
 	

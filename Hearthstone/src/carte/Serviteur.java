@@ -1,6 +1,7 @@
 package carte;
 
 import capacite.ICapacite;
+import exception.CapaciteException;
 import exception.HearthstoneException;
 import joueur.IJoueur;
 
@@ -85,8 +86,9 @@ public class Serviteur extends Carte{
 	 * 				cible que le joueur veut atteindre
 	 * La carte effectue l action que lui confere sa capacite
 	 * si elle n est pas deja utilisee
+	 * @throws CapaciteException 
 	 */
-	public void executerAction(Object cible) throws HearthstoneException {
+	public void executerAction(Object cible) throws HearthstoneException, CapaciteException {
 		if(this.getAttendre())
 			throw new HearthstoneException("Faut attendre un tour");
 		
@@ -99,19 +101,19 @@ public class Serviteur extends Carte{
 		peutJouer=true;
 	}
 	
-	public void executerEffetDebutTour(Object cible) {
+	public void executerEffetDebutTour(Object cible) throws CapaciteException {
 		this.getCapacite().executerEffetDebutTour();
 	}
 	
-	public void executerEffetFinTour() {
+	public void executerEffetFinTour() throws CapaciteException {
 		this.getCapacite().executerEffetFinTour();
 	}
 
-	public void executerEffetDebutMiseEnJeu(Object cible) throws HearthstoneException {
+	public void executerEffetDebutMiseEnJeu(Object cible) throws HearthstoneException, CapaciteException {
 		this.getCapacite().executerEffetMiseEnJeu(cible);
 	}
 
-	public void executerEffetDisparition(Object cible) throws HearthstoneException {
+	public void executerEffetDisparition(Object cible) throws HearthstoneException, CapaciteException {
 		this.getCapacite().executerEffetDisparition(cible);
 	}
 }

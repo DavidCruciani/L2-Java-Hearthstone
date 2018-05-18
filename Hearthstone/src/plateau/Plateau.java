@@ -1,6 +1,8 @@
 package plateau;
 
 import java.util.ArrayList;
+
+import exception.CapaciteException;
 import exception.HearthstoneException;
 import java.lang.Math;
 import joueur.IJoueur;
@@ -21,6 +23,8 @@ public class Plateau implements IPlateau{
 	 */
 	public Plateau() {
 		this.courant = null;
+		/*joueurs.add(null);
+		joueurs.add(null);*/
 	}
 	
 	public static Plateau plateau() {
@@ -37,7 +41,7 @@ public class Plateau implements IPlateau{
 	public void ajouterJoueur(IJoueur joueur) throws HearthstoneException {
 		if (joueur == null) throw new HearthstoneException("Joueur vide");
 		// indexage dans arraylist ??
-		if  (joueurs.get(1) != null) throw new HearthstoneException("Dejà deux joueurs");
+		if  (joueurs.size() == 2) throw new HearthstoneException("Dejà deux joueurs");
 		joueurs.add(joueur);
 	}
 	/**
@@ -64,6 +68,11 @@ public class Plateau implements IPlateau{
 	public void finTour(IJoueur joueur) throws HearthstoneException {
 		if (partie != true) throw new HearthstoneException("Partie non commencée");
 		if (joueur != courant) throw new HearthstoneException("Joueur non courant");
+		try {
+			joueur.finirTour();
+		} catch (CapaciteException e) {
+			e.printStackTrace();
+		}
 		courant = getAdversaire(joueur);
 	}
 /**
@@ -122,16 +131,21 @@ public class Plateau implements IPlateau{
 	 * @return les infos sur la partie, sur le joueur courant
 	 */
 	public String toString() {
+		// A Completer
 		String partie = null;
 		if (this.estDemaree())
 			try {
-				partie = "Cette partie est démarée" + this.getJoueurCourant() + " affronte" + this.getAdversaire(this.getJoueurCourant()) + "; C'est à vous : "+this.getJoueurCourant().toString();
+				partie = "Cette partie est démarée\n" + this.getJoueurCourant() + " affronte " + this.getAdversaire(this.getJoueurCourant()) + ";\nC'est à vous : "+this.getJoueurCourant().getPseudo()+ "\n\n";
 			} catch (HearthstoneException e) {
 				e.printStackTrace();
 			}
 		else
 			partie = "Cette partie n'est pas demarrée";
 		return partie;
+	}
+	
+	public ArrayList<IJoueur> getJoueurs(){
+		return this.joueurs;
 	}
 
 }

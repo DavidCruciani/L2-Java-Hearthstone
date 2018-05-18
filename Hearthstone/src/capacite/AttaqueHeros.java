@@ -1,5 +1,6 @@
 package capacite;
 
+import exception.CapaciteException;
 import heros.Heros;
 
 /**
@@ -29,20 +30,23 @@ public class AttaqueHeros extends Capacite {
 		setDejaUtilise(true);
 	}
 
-	public void executerEffetDebutTour() {
-	
-	}
-
-	public void executerEffetDisparition(Object cible) {
-	
-	}
-
-	public void executerEffetFinTour() {
-	
-	}
-
-	public void executerEffetMiseEnJeu(Object cible) {
+	public void executerEffetDebutTour() throws CapaciteException {
+		throw new CapaciteException("Pas d'effet de début de tour");
 		
+	}
+
+	public void executerEffetDisparition(Object cible) throws CapaciteException {
+		throw new CapaciteException("Pas d'effet de disparition");
+	
+	}
+
+	public void executerEffetFinTour() throws CapaciteException {
+		throw new CapaciteException("Pas d'effet de fin de tour");
+	
+	}
+
+	public void executerEffetMiseEnJeu(Object cible) throws CapaciteException {
+		throw new CapaciteException("Pas d'effet de mise en jeu");
 	}
 
 
