@@ -76,4 +76,8 @@ public class AttaqueCible extends Capacite {
 		throw new CapaciteException("Pas d'effet de mise en jeu");
 	}
 
+	public int getDegas() {
+		return degas;
+	}
+
 }

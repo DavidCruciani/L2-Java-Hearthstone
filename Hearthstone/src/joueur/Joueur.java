@@ -19,7 +19,7 @@ import plateau.Plateau;
 
 public class Joueur implements IJoueur {
 	private String pseudo;
-	private int mana = 1;
+	private int mana = 50;
 	private int stockMana = 0;
 	private ArrayList<ICarte> deck = new ArrayList<ICarte>();
 	private ArrayList<ICarte> main = new ArrayList<ICarte>();
@@ -158,6 +158,7 @@ public class Joueur implements IJoueur {
 					main.remove(carte);
 				}
 			}
+			else throw new HearthstoneException("pas mana");
 		}
 		else
 			throw new HearthstoneException("Carte pas en Main");
@@ -203,8 +204,12 @@ public class Joueur implements IJoueur {
 		catch(HearthstoneException e) {
 			e.printStackTrace();
 		}
-		
 		Plateau.plateau().setJoueurCourant(this);
+		
+		/*for(ICarte carte : Plateau.plateau().getJoueurCourant().getJeu()) {
+			((Serviteur) carte).
+		}*/
+		
 	}
 
 	/**
@@ -226,9 +231,9 @@ public class Joueur implements IJoueur {
 	}
 
 
-	public void utiliserPouvoir(Object cible) throws HearthstoneException, CapaciteException {
+	public void utiliserPouvoir(Object cible) throws HearthstoneException, CapaciteException{
 		if(hero.getPouvoir() != null) {
-			hero.getPouvoir().executerAction(cible);
+			hero.getPouvoir().executerEffetMiseEnJeu(cible);
 		}
 		else
 			throw new HearthstoneException("Ton Hero est mauvais, il a pas de pouvoir");

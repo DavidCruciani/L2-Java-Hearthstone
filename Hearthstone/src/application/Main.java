@@ -114,12 +114,12 @@ public class Main {
 		((Joueur) joueur1).getDeck().addAll(CartesNeutres(joueur1));
 		((Joueur) joueur2).getDeck().addAll(CartesNeutres(joueur2));
 		
-		ICarte gnome = new Serviteur ("Gnôme lépreux " , 1 ,joueur1 , 1 , 1 , new AttaqueHeros ( " Attaque du lépreux " , "Inflige 2 points de dégats au héros " , 2 ));
-		((Joueur) joueur1).getMain().add(gnome);
+		ICarte attaque_mentale= new Sort ( " Attaque mentale " , 2 ,  joueur1 , new AttaqueHeros ( "Attaque mentale " , "Inflige 5 points de dégats au héros " , 5));
+		((Joueur) joueur1).getMain().add(attaque_mentale);
+		/*ICarte gnome = new Serviteur ("Gnôme lépreux " , 1 ,joueur1 , 1 , 1 , new AttaqueHeros ( " Attaque du lépreux " , "Inflige 2 points de dégats au héros " , 2 ));
+		((Joueur) joueur1).getMain().add(gnome);*/
 		
-		/*for (ICarte carte : joueur1.getMain()) {
-			System.out.println(carte.toString());
-		}*/
+		
 		
 		// Création plateau
 		try {
@@ -147,6 +147,14 @@ public class Main {
 		}	
 		
 		while (true) {
+			for (ICarte carte : joueur1.getMain()) {
+				System.out.println("main1");
+				System.out.println(carte.toString());
+			}
+			for (ICarte carte : joueur2.getMain()) {
+				System.out.println("main2");
+				System.out.println(carte.toString());
+			}
 			System.out.println(Plateau.plateau().toString());
 			String choix = menu();
 			try {
@@ -155,6 +163,7 @@ public class Main {
 				e.printStackTrace();
 			}
 			for (ICarte carte : joueur1.getJeu()) {
+				System.out.println("jeu");
 				System.out.println(carte.toString());
 			}
 		}
@@ -188,6 +197,8 @@ public class Main {
 		monInterface = new InterfaceQuitter(monInterface);
 		monInterface = new InterfaceFinirTour(monInterface);
 		monInterface = new InterfaceJouerCarte(monInterface);
+		monInterface = new InterfaceUtiliserCarte(monInterface);
+		monInterface = new InterfaceUtiliserPouvoir(monInterface);
 		return monInterface;
 	}
 }

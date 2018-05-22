@@ -73,7 +73,7 @@ public class Plateau implements IPlateau{
 		} catch (CapaciteException e) {
 			e.printStackTrace();
 		}
-		courant = getAdversaire(joueur);
+		this.getAdversaire(joueur).prendreTour();
 	}
 /**
  * Terminer la partie, le heros de l'adversaire meurt
@@ -135,7 +135,7 @@ public class Plateau implements IPlateau{
 		String partie = null;
 		if (this.estDemaree())
 			try {
-				partie = "Cette partie est démarée\n" + this.getJoueurCourant() + " affronte " + this.getAdversaire(this.getJoueurCourant()) + ";\nC'est à vous : "+this.getJoueurCourant().getPseudo()+ "\n\n";
+				partie = "Cette partie est démarée\n" + this.getJoueurCourant()+ this.getJoueurCourant().getHeros() + " affronte " + this.getAdversaire(this.getJoueurCourant()) +this.getAdversaire(this.getJoueurCourant()).getHeros() + ";\nC'est à vous : "+this.getJoueurCourant().getPseudo()+ "\n\n";
 			} catch (HearthstoneException e) {
 				e.printStackTrace();
 			}

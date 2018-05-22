@@ -1,9 +1,12 @@
 package carte;
 
 import capacite.ICapacite;
+import capacite.Provocation;
 import exception.CapaciteException;
 import exception.HearthstoneException;
+import heros.Heros;
 import joueur.IJoueur;
+import plateau.Plateau;
 
 /**
  * Serviteur est une classe issue de la classe Carte
@@ -86,32 +89,54 @@ public class Serviteur extends Carte{
 	 * 				cible que le joueur veut atteindre
 	 * La carte effectue l action que lui confere sa capacite
 	 * si elle n est pas deja utilisee
-	 * @throws CapaciteException 
+	 * @throws HearthstoneException 
 	 */
-	public void executerAction(Object cible) throws HearthstoneException, CapaciteException {
+	public void executerAction(Object cible) throws HearthstoneException{
 		if(this.getAttendre())
 			throw new HearthstoneException("Faut attendre un tour");
 		
-		if(this.peutJouer)
-			this.getCapacite().executerAction(cible);
+		if(this.peutJouer) {
+			if(cible == null)
+				throw new IllegalArgumentException("Ta pas de cible");
+			if(!(cible instanceof Heros) && !(cible instanceof Serviteur))
+				throw new IllegalArgumentException("Tu vise quoi la ? un oiseau ?");
+			if(cible instanceof Heros) {
+				if(aProvocation()) 
+					throw new HearthstoneException("L'adversaire a une provocation");
 		
-		else
-			throw new HearthstoneException("Deja joué");
-		
-		peutJouer=true;
+				((Heros)cible).perdreVie(attaque);
+				peutJouer=false;
+				
+				if( ((Heros)cible).estMort()) {
+					Plateau.plateau().gagnePartie(Plateau.plateau().getJoueurCourant());
+				}
+				
+			}
+			if(cible instanceof Serviteur) {
+				if(aProvocation()) 
+					if(!( ((Serviteur)cible).getCapacite() instanceof Provocation ) )
+						throw new HearthstoneException("L'adversaire a une provocation");
+				
+				((Serviteur)cible).estAttaquer(attaque);
+				this.estAttaquer(((Serviteur)cible).getAttaque());
+				peutJouer=false;
+				
+				if( ((Serviteur)cible).disparait() ) 
+					Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).perdreCarte( ((ICarte)cible) );
+				if(this.disparait())
+					Plateau.plateau().getJoueurCourant().perdreCarte(this);
+			}
+		}
+		else throw new HearthstoneException("Tu la deja joué ce tour ci");
 	}
-	
-	public void executerAction() throws HearthstoneException, CapaciteException {
-		if(this.getAttendre())
-			throw new HearthstoneException("Faut attendre un tour");
 		
-		if(this.peutJouer)
-			this.getCapacite().executerAction(this);
-		
-		else
-			throw new HearthstoneException("Deja joué");
-		
-		peutJouer=true;
+	public boolean aProvocation() throws HearthstoneException {
+		for(ICarte carte : Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu() ) {
+			if(((Serviteur) carte).getCapacite() instanceof Provocation)
+				return true;
+		}
+		return false;
+				
 	}
 	
 	public void executerEffetDebutTour(Object cible) throws CapaciteException {

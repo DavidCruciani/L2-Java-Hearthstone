@@ -15,7 +15,7 @@ public class InterfaceJouerCarte extends Interface{
 
 	@Override
 	public String getDescription() {
-		return "Jouer une carte";
+		return "Jouer une carte de ta main";
 	}
 
 	@Override

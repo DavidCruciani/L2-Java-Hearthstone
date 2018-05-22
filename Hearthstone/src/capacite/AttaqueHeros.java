@@ -1,7 +1,9 @@
 package capacite;
 
 import exception.CapaciteException;
+import exception.HearthstoneException;
 import heros.Heros;
+import plateau.Plateau;
 
 /**
  * AttaqueHeros est une classe issue de la classe Capacite
@@ -19,15 +21,8 @@ public class AttaqueHeros extends Capacite {
 		this.degas=degas;
 	}
 
-	public void executerAction(Object cible) {
-		if(cible == null)
-			throw new IllegalArgumentException("Ta pas de cible");
-		if(getDejaUtilise())
-			throw new IllegalArgumentException("Capacite deja utilise");
-		if(!(cible instanceof Heros))
-			throw new IllegalArgumentException("C'est pas un Heros que tu vise");
-		((Heros)cible).perdreVie(degas);
-		setDejaUtilise(true);
+	public void executerAction(Object cible) throws CapaciteException {
+		throw new CapaciteException("Pas d'effet d'action");
 	}
 
 	public void executerEffetDebutTour() throws CapaciteException {
@@ -45,8 +40,16 @@ public class AttaqueHeros extends Capacite {
 	
 	}
 
-	public void executerEffetMiseEnJeu(Object cible) throws CapaciteException {
-		throw new CapaciteException("Pas d'effet de mise en jeu");
+	public void executerEffetMiseEnJeu(Object cible) throws CapaciteException, HearthstoneException {
+		if(getDejaUtilise())
+			throw new IllegalArgumentException("Capacite deja utilise");
+		if(!(cible instanceof Heros))
+			throw new IllegalArgumentException("C'est pas un Heros que tu vise");
+		((Heros)cible).perdreVie(degas);
+		if( ((Heros)cible).estMort()) {
+			Plateau.plateau().gagnePartie(Plateau.plateau().getJoueurCourant());
+		}
+		setDejaUtilise(true);
 	}
 
 	@Override
