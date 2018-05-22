@@ -101,6 +101,19 @@ public class Serviteur extends Carte{
 		peutJouer=true;
 	}
 	
+	public void executerAction() throws HearthstoneException, CapaciteException {
+		if(this.getAttendre())
+			throw new HearthstoneException("Faut attendre un tour");
+		
+		if(this.peutJouer)
+			this.getCapacite().executerAction(this);
+		
+		else
+			throw new HearthstoneException("Deja joué");
+		
+		peutJouer=true;
+	}
+	
 	public void executerEffetDebutTour(Object cible) throws CapaciteException {
 		this.getCapacite().executerEffetDebutTour();
 	}

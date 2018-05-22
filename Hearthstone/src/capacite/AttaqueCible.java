@@ -15,6 +15,10 @@ public class AttaqueCible extends Capacite {
 		this.degas=degas;
 	}
 	
+	public boolean getBesoinCible(){
+		return true;
+	}
+	
 	public void executerAction(Object cible) throws HearthstoneException {
 		if(cible == null)
 			throw new IllegalArgumentException("Ta pas de cible");

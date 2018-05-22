@@ -52,4 +52,9 @@ public class InvocationServiteur extends Capacite {
 	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
 		Plateau.plateau().getJoueurCourant().getJeu().add(this.getInvocation());
 	}
+
+	@Override
+	public boolean getBesoinCible() {
+		return false;
+	}
 }

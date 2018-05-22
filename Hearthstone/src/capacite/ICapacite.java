@@ -12,5 +12,6 @@ public interface ICapacite {
 	    public abstract void executerEffetMiseEnJeu(Object cible) throws HearthstoneException, CapaciteException;
 	    public abstract String getDescription();
 	    public abstract String getNom();
+	    public abstract boolean getBesoinCible();
 
 }

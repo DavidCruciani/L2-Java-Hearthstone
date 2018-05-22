@@ -55,4 +55,9 @@ public class MarqueChasseur extends Capacite {
 		throw new CapaciteException("Pas d'effet de mise en jeu");
 	}
 
+	@Override
+	public boolean getBesoinCible() {
+		return true;
+	}
+
 }

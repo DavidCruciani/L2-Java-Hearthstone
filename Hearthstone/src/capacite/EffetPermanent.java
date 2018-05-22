@@ -61,5 +61,10 @@ public class EffetPermanent extends Capacite {
 		}
 		
 	}
+
+	@Override
+	public boolean getBesoinCible() {
+		return false;
+	}
 	
 }

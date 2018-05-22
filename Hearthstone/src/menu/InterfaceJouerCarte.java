@@ -5,6 +5,7 @@ import carte.ICarte;
 import exception.HearthstoneException;
 import menu.Console;
 
+
 public class InterfaceJouerCarte extends Interface{
 
 	public final static Console es = new Console();
@@ -25,7 +26,7 @@ public class InterfaceJouerCarte extends Interface{
 	@Override
 	public void executerInteraction(Plateau plateau) throws Exception {
 		
-		String cible;
+		Object cible = null;
 		ICarte carte = null;
 		while( carte == null)
 		{
@@ -44,9 +45,32 @@ public class InterfaceJouerCarte extends Interface{
 			plateau.getJoueurCourant().jouerCarte(carte);
 		}
 		catch (HearthstoneException e){
-			//ALLER a l'interface cible
-			System.out.println("C'est qui que tu vises ma poule ?");
-			cible = es.readLine();
+			int ent_cible = 0;
+			while (ent_cible != 1 && ent_cible != 2)
+			{
+				System.out.println("Quelle est votre cible ?\n");
+				System.out.println("1. Le héros\n");
+				System.out.println("2. Une autre carte\n");
+				ent_cible = es.readInt();
+			}
+			if (ent_cible == 1)
+			{
+				cible = plateau.getAdversaire(plateau.getJoueurCourant()).getHeros();
+			}
+			else {
+				carte = null;
+				while (carte == null) {
+					System.out.println("Quelle carte visez-vous ?");
+					String choix = es.readLine();
+					try {
+						cible = plateau.getAdversaire(plateau.getJoueurCourant()).getCarteEnJeu(choix);
+					}
+					catch(HearthstoneException f)
+					{
+						System.out.println(f.getMessage());
+					}
+				}
+			}
 			plateau.getJoueurCourant().jouerCarte(carte, cible);
 		}
 		

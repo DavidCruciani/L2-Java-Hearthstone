@@ -48,9 +48,15 @@ public class Charge extends Capacite {
 		if(!(cible instanceof Serviteur))
 			throw new IllegalArgumentException("C'est pas un serviteur que tu vise");
 		if( !( ( (Serviteur) cible ).getAttendre() ) )
-			throw new HearthstoneException("Le serviteur n'attend pas, utilise lacharge sur un autre");
+			throw new HearthstoneException("Le serviteur n'attend pas, utilise la charge sur un autre");
 		((Serviteur)cible).setAttendre(false);
 		setDejaUtilise(true);
+	}
+
+
+	@Override
+	public boolean getBesoinCible() {
+		return true;
 	}
 	
 }

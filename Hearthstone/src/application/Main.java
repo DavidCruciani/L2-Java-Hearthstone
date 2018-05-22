@@ -114,6 +114,13 @@ public class Main {
 		((Joueur) joueur1).getDeck().addAll(CartesNeutres(joueur1));
 		((Joueur) joueur2).getDeck().addAll(CartesNeutres(joueur2));
 		
+		ICarte gnome = new Serviteur ("Gnôme lépreux " , 1 ,joueur1 , 1 , 1 , new AttaqueHeros ( " Attaque du lépreux " , "Inflige 2 points de dégats au héros " , 2 ));
+		((Joueur) joueur1).getMain().add(gnome);
+		
+		/*for (ICarte carte : joueur1.getMain()) {
+			System.out.println(carte.toString());
+		}*/
+		
 		// Création plateau
 		try {
 		Plateau.plateau().ajouterJoueur(joueur1);
@@ -147,7 +154,11 @@ public class Main {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			for (ICarte carte : joueur1.getJeu()) {
+				System.out.println(carte.toString());
+			}
 		}
+		
 		
 	}
 	
@@ -176,6 +187,7 @@ public class Main {
 		Interface monInterface = null;
 		monInterface = new InterfaceQuitter(monInterface);
 		monInterface = new InterfaceFinirTour(monInterface);
+		monInterface = new InterfaceJouerCarte(monInterface);
 		return monInterface;
 	}
 }
