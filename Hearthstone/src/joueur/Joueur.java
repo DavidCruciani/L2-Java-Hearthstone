@@ -119,18 +119,33 @@ public class Joueur implements IJoueur {
 	public void jouerCarte(ICarte carte) throws HearthstoneException, CapaciteException {
 		if(!main.contains(carte)) throw new HearthstoneException("Carte pas en Main");
 		if(!(this.getMana() >= carte.getCout())) throw new HearthstoneException("Pas mana");
-		enJeu.add(carte);
-		main.remove(carte);
-		this.mana -= carte.getCout();
-		try {
-			carte.executerEffetDebutMiseEnJeu(null);
+		if(carte instanceof Serviteur) {
+			enJeu.add(carte);
+			main.remove(carte);
+			this.mana -= carte.getCout();
+			try {
+				carte.executerEffetDebutMiseEnJeu(null);
+			}
+			catch (HearthstoneException e) {
+				this.mana = this.mana + carte.getCout();
+				this.main.add(carte);
+				this.getJeu().remove(carte);
+				throw new HearthstoneException("Pas de cible");
+			}
 		}
-		catch (HearthstoneException e) {
-			this.mana = this.mana + carte.getCout();
-			this.main.add(carte);
-			this.getJeu().remove(carte);
-			throw new HearthstoneException("Pas de cible");
+		else if(carte instanceof Sort){
+			this.mana -= carte.getCout();
+			main.remove(carte);
+			try {
+				carte.executerEffetDebutMiseEnJeu(null);
+			}
+			catch (HearthstoneException e) {
+				this.mana = this.mana + carte.getCout();
+				this.main.add(carte);
+				throw new HearthstoneException("Pas de cible");
+			}
 		}
+		
 	}
 
 	/**
@@ -205,10 +220,11 @@ public class Joueur implements IJoueur {
 			e.printStackTrace();
 		}
 		Plateau.plateau().setJoueurCourant(this);
-		
-		/*for(ICarte carte : Plateau.plateau().getJoueurCourant().getJeu()) {
-			((Serviteur) carte).
-		}*/
+		getHeros().getPouvoir().setDejaUtilise(false);
+		for(ICarte carte : Plateau.plateau().getJoueurCourant().getJeu()) {
+			((Serviteur) carte).setAttendre(false);
+			((Serviteur) carte).setPeutJouer(true);
+		}
 		
 	}
 

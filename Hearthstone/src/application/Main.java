@@ -2,25 +2,12 @@ package application;
 
 import java.util.ArrayList;
 
-import capacite.AttaqueCible;
-import capacite.AttaqueHeros;
-import capacite.AttaqueTotale;
-import capacite.Charge;
-import capacite.EffetPermanent;
-import capacite.ImageMirroir;
-import capacite.InvocationChien;
-import capacite.InvocationServiteur;
-import capacite.MarqueChasseur;
-import capacite.Pioche;
-import capacite.Provocation;
-import carte.ICarte;
-import carte.Serviteur;
-import joueur.IJoueur;
-import joueur.Joueur;
+import capacite.*;
+import carte.*;
+import joueur.*;
 import plateau.Plateau;
-import carte.Sort;
 import menu.*;
-import exception.HearthstoneException;
+import exception.*;
 import heros.Heros;
 
 public class Main {
@@ -33,7 +20,7 @@ public class Main {
 		ArrayList<ICarte> cartesJaina = new ArrayList<ICarte> ();
 		ICarte flamme =new Sort("Choc de Flamme ", 7 , proprietaire ,new AttaqueTotale("Attaque massive","inflige 4 pts de dégats a tous les serviteurs adverses ", 4));
 		cartesJaina.add(flamme);
-		ICarte givre = new Sort ("Eclair de givre", 2, proprietaire, new AttaqueCible("Attaque de givre", "inflige 3 pts de dégats au personnages cible", 3));
+		ICarte givre = new Sort ("Eclair de givre", 2, proprietaire, new AttaqueCibleSort("Attaque de givre", "inflige 3 pts de dégats au personnages cible", 3));
 		cartesJaina.add(givre);
 		ICarte arcanes = new Sort ("Intelligence des arcanes", 2, proprietaire, new Pioche("Pioche","Pioche deux cartes",2));
 		cartesJaina.add(arcanes);
@@ -51,7 +38,7 @@ public class Main {
 		ArrayList<ICarte> cartesRexxar = new ArrayList<ICarte> ();
 		ICarte chasseur = new Sort ("Marque du Chasseur", 1, proprietaire, new MarqueChasseur("Marque du chaseur","Abaisse à 1 les points de vie du serviteur ciblé" ));
 		cartesRexxar.add(chasseur);
-		ICarte tirarcanes = new Sort ("Tir des arcanes", 1, proprietaire, new AttaqueCible("Tir des arcanes", "inflige 2 pts de dégats au personnage cible", 2));
+		ICarte tirarcanes = new Sort ("Tir des arcanes", 1, proprietaire, new AttaqueCibleSort("Tir des arcanes", "inflige 2 pts de dégats au personnage cible", 2));
 		cartesRexxar.add(tirarcanes);
 		ICarte chiens = new Sort ("Lachez les chiens", 3, proprietaire, new InvocationChien("invocation des chiens","invoque autant de chiens que l'adversaire a de cartes en jeu" )); 
 		cartesRexxar.add(chiens);
@@ -105,8 +92,8 @@ public class Main {
 	
 	public static void main(String[] args) throws HearthstoneException {
 		// Création des joueurs
-		IJoueur joueur1=new Joueur("Joueur 1 " , new Heros("Rexxar" , new AttaqueCible ("Tir assuré ","Inflige 2 points de degats à la cible", 2)) );
-		IJoueur joueur2=new Joueur ( "Joueur 2" , new Heros("Jaina",new AttaqueCible("Boule de feu","Inflige 1 point de degat à la cible", 1)));
+		IJoueur joueur1=new Joueur("Joueur 1 " , new Heros("Rexxar" , new AttaqueHeros ("Tir assuré ","Inflige 2 points de degats à la cible", 2)) );
+		IJoueur joueur2=new Joueur ( "Joueur 2" , new Heros("Jaina",new AttaqueCibleSort("Boule de feu","Inflige 1 point de degat à la cible", 1)));
 		
 		((Joueur) joueur1).setDeck(CarteRexxar(joueur1));
 		((Joueur) joueur2).setDeck(CarteJaina(joueur2));
@@ -114,12 +101,19 @@ public class Main {
 		((Joueur) joueur1).getDeck().addAll(CartesNeutres(joueur1));
 		((Joueur) joueur2).getDeck().addAll(CartesNeutres(joueur2));
 		
-		ICarte attaque_mentale= new Sort ( " Attaque mentale " , 2 ,  joueur1 , new AttaqueHeros ( "Attaque mentale " , "Inflige 5 points de dégats au héros " , 5));
-		((Joueur) joueur1).getMain().add(attaque_mentale);
+		ICarte flamme =new Sort("Choc de Flamme ", 7 , joueur1 ,new AttaqueTotale("Attaque massive","inflige 4 pts de dégats a tous les serviteurs adverses ", 4));
+		((Joueur) joueur1).getMain().add(flamme);
+		
+		ICarte givre = new Sort ("Eclair de givre", 2, joueur1, new AttaqueCibleSort("Attaque de givre", "inflige 3 pts de dégats au personnages cible", 3));
+		((Joueur) joueur1).getMain().add(givre);
 		/*ICarte gnome = new Serviteur ("Gnôme lépreux " , 1 ,joueur1 , 1 , 1 , new AttaqueHeros ( " Attaque du lépreux " , "Inflige 2 points de dégats au héros " , 2 ));
 		((Joueur) joueur1).getMain().add(gnome);*/
 		
+		ICarte gnome = new Serviteur ("Gnôme lépreux " , 1 ,joueur2 , 1 , 1 , new AttaqueHeros ( " Attaque du lépreux " , "Inflige 2 points de dégats au héros " , 2 ));
 		
+		ICarte golem = new Serviteur ( " Golem des moissons" , 3 , joueur2 , 2 , 3 , new InvocationServiteur ( "Golemisation " , " Invoque un Golem endomage 2/1" , new Serviteur ( " Serviteur de Golem " , 0 , joueur2 , 2 , 1 ,null)));
+		((Joueur) joueur2).getJeu().add(gnome);
+		((Joueur) joueur2).getJeu().add(golem);
 		
 		// Création plateau
 		try {
@@ -147,6 +141,8 @@ public class Main {
 		}	
 		
 		while (true) {
+			
+			
 			for (ICarte carte : joueur1.getMain()) {
 				System.out.println("main1");
 				System.out.println(carte.toString());
@@ -155,6 +151,8 @@ public class Main {
 				System.out.println("main2");
 				System.out.println(carte.toString());
 			}
+			
+			
 			System.out.println(Plateau.plateau().toString());
 			String choix = menu();
 			try {
@@ -162,10 +160,18 @@ public class Main {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+			
 			for (ICarte carte : joueur1.getJeu()) {
 				System.out.println("jeu");
 				System.out.println(carte.toString());
 			}
+			for (ICarte carte : joueur2.getJeu()) {
+				System.out.println("jeu2");
+				System.out.println(carte.toString());
+			}
+			
+			
 		}
 		
 		

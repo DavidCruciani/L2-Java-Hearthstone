@@ -4,7 +4,6 @@ import carte.ICarte;
 import carte.Serviteur;
 import exception.CapaciteException;
 import exception.HearthstoneException;
-import heros.Heros;
 import plateau.Plateau;
 
 /**
@@ -41,17 +40,16 @@ public class AttaqueTotale extends Capacite {
 	}
 
 	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
-		
 		if(getDejaUtilise())
 			throw new IllegalArgumentException("Capacite deja utilise");
-		if(!(cible instanceof Heros) && !(cible instanceof Serviteur))
-			throw new IllegalArgumentException("C'est pas un Heros que tu vise");
-		if(cible instanceof Heros) {
-				throw new HearthstoneException("Tu dois choisir un serviteur");
+		for(int i=0;i<Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().size();i++ ){
+			((Serviteur) Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().get(i)).estAttaquer(degas);
 		}
-		for(ICarte carte : Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu() )
-			((Serviteur) carte).estAttaquer(degas);
-		
+		for(int i=1; i<Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().size();i-- ){
+			if( ((Serviteur) Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().get(i)).disparait() ) {
+				Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).perdreCarte(Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().get(i));
+			}
+		}
 		setDejaUtilise(true);
 	}
 

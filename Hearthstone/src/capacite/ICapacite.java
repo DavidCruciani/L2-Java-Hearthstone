@@ -13,5 +13,6 @@ public interface ICapacite {
 	    public abstract String getDescription();
 	    public abstract String getNom();
 	    public abstract boolean getBesoinCible();
+		public abstract void setDejaUtilise(boolean dejaUtilise);
 
 }

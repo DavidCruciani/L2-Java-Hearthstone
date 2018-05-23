@@ -75,7 +75,7 @@ public class Heros {
 	
 	public String toString() {
 		if(pouvoir != null) {
-			return "Nom[ "+this.getNom()+" ], Vie[ "+this.getVie()+" ], Pouvoir[ "+this.getPouvoir()+" ]";
+			return "Nom[ "+this.getNom()+" ], Vie[ "+this.getVie()+" ], Pouvoir"+this.getPouvoir();
 		}
 		return "Nom[ "+this.getNom()+" ], Vie[ "+this.getVie()+" ]";
 	}

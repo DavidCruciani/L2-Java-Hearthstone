@@ -43,6 +43,9 @@ public class AttaqueHeros extends Capacite {
 	public void executerEffetMiseEnJeu(Object cible) throws CapaciteException, HearthstoneException {
 		if(getDejaUtilise())
 			throw new IllegalArgumentException("Capacite deja utilise");
+		
+		cible=Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getHeros();
+		
 		if(!(cible instanceof Heros))
 			throw new IllegalArgumentException("C'est pas un Heros que tu vise");
 		((Heros)cible).perdreVie(degas);

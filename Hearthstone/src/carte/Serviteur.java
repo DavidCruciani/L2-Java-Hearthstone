@@ -40,6 +40,13 @@ public class Serviteur extends Carte{
 	public ICapacite getCapacite() {
 		return this.capacite;
 	}
+	public boolean getPeutJouer() {
+		return peutJouer;
+	}
+
+	public void setPeutJouer(boolean peutJouer) {
+		this.peutJouer = peutJouer;
+	}
 	
 	public void setAttaque(int attaque) {
 		this.attaque=attaque;
@@ -95,39 +102,49 @@ public class Serviteur extends Carte{
 		if(this.getAttendre())
 			throw new HearthstoneException("Faut attendre un tour");
 		
-		if(this.peutJouer) {
-			if(cible == null)
-				throw new IllegalArgumentException("Ta pas de cible");
-			if(!(cible instanceof Heros) && !(cible instanceof Serviteur))
-				throw new IllegalArgumentException("Tu vise quoi la ? un oiseau ?");
-			if(cible instanceof Heros) {
-				if(aProvocation()) 
-					throw new HearthstoneException("L'adversaire a une provocation");
-		
-				((Heros)cible).perdreVie(attaque);
-				peutJouer=false;
+			try {
+				getCapacite().executerAction(cible);
+			} 
+			catch (CapaciteException e) {
+				e.getMessage();
+				if(this.getPeutJouer()) {
+					if(cible == null)
+						throw new IllegalArgumentException("Ta pas de cible");
+					if(!(cible instanceof Heros) && !(cible instanceof Serviteur))
+						throw new IllegalArgumentException("Tu vise quoi la ? un oiseau ?");
+					if(cible instanceof Heros) {
+						if(aProvocation()) 
+							throw new HearthstoneException("L'adversaire a une provocation");
 				
-				if( ((Heros)cible).estMort()) {
-					Plateau.plateau().gagnePartie(Plateau.plateau().getJoueurCourant());
+						((Heros)cible).perdreVie(attaque);
+						setPeutJouer(false);
+						
+						if( ((Heros)cible).estMort()) {
+							Plateau.plateau().gagnePartie(Plateau.plateau().getJoueurCourant());
+						}
+						
+					}
+					if(cible instanceof Serviteur) {
+						if(aProvocation()) 
+							if(!( ((Serviteur)cible).getCapacite() instanceof Provocation ) )
+								throw new HearthstoneException("L'adversaire a une provocation");
+						
+						((Serviteur)cible).estAttaquer(attaque);
+						this.estAttaquer(((Serviteur)cible).getAttaque());
+						setPeutJouer(false);
+						
+						if( ((Serviteur)cible).disparait() ) 
+							Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).perdreCarte( ((ICarte)cible) );
+						if(this.disparait())
+							Plateau.plateau().getJoueurCourant().perdreCarte(this);
+					}
 				}
-				
+				else throw new HearthstoneException("Tu la deja joué ce tour ci");
 			}
-			if(cible instanceof Serviteur) {
-				if(aProvocation()) 
-					if(!( ((Serviteur)cible).getCapacite() instanceof Provocation ) )
-						throw new HearthstoneException("L'adversaire a une provocation");
-				
-				((Serviteur)cible).estAttaquer(attaque);
-				this.estAttaquer(((Serviteur)cible).getAttaque());
-				peutJouer=false;
-				
-				if( ((Serviteur)cible).disparait() ) 
-					Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).perdreCarte( ((ICarte)cible) );
-				if(this.disparait())
-					Plateau.plateau().getJoueurCourant().perdreCarte(this);
-			}
-		}
-		else throw new HearthstoneException("Tu la deja joué ce tour ci");
+		
+		
+		
+		
 	}
 		
 	public boolean aProvocation() throws HearthstoneException {
@@ -154,4 +171,5 @@ public class Serviteur extends Carte{
 	public void executerEffetDisparition(Object cible) throws HearthstoneException, CapaciteException {
 		this.getCapacite().executerEffetDisparition(cible);
 	}
+
 }
