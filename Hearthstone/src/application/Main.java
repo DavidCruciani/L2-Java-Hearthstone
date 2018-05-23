@@ -92,7 +92,7 @@ public class Main {
 	
 	public static void main(String[] args) throws HearthstoneException {
 		// Création des joueurs
-		IJoueur joueur1=new Joueur("Joueur 1 " , new Heros("Rexxar" , new AttaqueHeros ("Tir assuré ","Inflige 2 points de degats à la cible", 2)) );
+		IJoueur joueur1=new Joueur("Joueur 1 " , new Heros("Rexxar" , new AttaqueHeros ("Tir assuré ","Inflige 2 points de degats au Hero adverse", 2)) );
 		IJoueur joueur2=new Joueur ( "Joueur 2" , new Heros("Jaina",new AttaqueCibleSort("Boule de feu","Inflige 1 point de degat à la cible", 1)));
 		
 		((Joueur) joueur1).setDeck(CarteRexxar(joueur1));
@@ -102,10 +102,10 @@ public class Main {
 		((Joueur) joueur2).getDeck().addAll(CartesNeutres(joueur2));
 		
 		ICarte gnome = new Serviteur ("Gnôme lépreux " , 1 ,joueur1 , 1 , 1 , new AttaqueHeros ( " Attaque du lépreux " , "Inflige 2 points de dégats au héros " , 2 ));
-		((Joueur) joueur1).getMain().add(gnome);
+		((Joueur) joueur1).getJeu().add(gnome);
 		
 		ICarte golem = new Serviteur ( "Golem des moissons" , 3 , joueur2 , 2 , 3 , new InvocationServiteur ( "Golemisation " , " Invoque un Golem endomage 2/1" , new Serviteur ( " Serviteur de Golem " , 0 , joueur2 , 2 , 1 ,null)));
-		((Joueur) joueur2).getJeu().add(gnome);
+		//((Joueur) joueur2).getJeu().add(gnome);
 		((Joueur) joueur2).getJeu().add(golem);
 		
 		// Création plateau
