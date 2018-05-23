@@ -75,7 +75,7 @@ public class Main {
 		ICarte gnome = new Serviteur ("Gnôme lépreux " , 1 ,proprietaire , 1 , 1 , new AttaqueHeros ( " Attaque du lépreux " , "Inflige 2 points de dégats au héros " , 2 ));
 		cartesNeutres.add(gnome);
 		
-		ICarte golem = new Serviteur ( " Golem des moissons" , 3 , proprietaire , 2 , 3 , new InvocationServiteur ( "Golemisation " , " Invoque un Golem endomage 2/1" , new Serviteur ( " Serviteur de Golem " , 0 , proprietaire , 2 , 1 ,null)));
+		ICarte golem = new Serviteur ( "Golem des moissons" , 3 , proprietaire , 2 , 3 , new InvocationServiteur ( "Golemisation " , " Invoque un Golem endomage 2/1" , new Serviteur ( " Serviteur de Golem " , 0 , proprietaire , 2 , 1 ,null)));
 		cartesNeutres.add(golem);
 		
 		ICarte charge = new Sort("Charge" , 1 , proprietaire , new Charge());
@@ -101,17 +101,10 @@ public class Main {
 		((Joueur) joueur1).getDeck().addAll(CartesNeutres(joueur1));
 		((Joueur) joueur2).getDeck().addAll(CartesNeutres(joueur2));
 		
-		ICarte flamme =new Sort("Choc de Flamme ", 7 , joueur1 ,new AttaqueTotale("Attaque massive","inflige 4 pts de dégats a tous les serviteurs adverses ", 4));
-		((Joueur) joueur1).getMain().add(flamme);
+		ICarte gnome = new Serviteur ("Gnôme lépreux " , 1 ,joueur1 , 1 , 1 , new AttaqueHeros ( " Attaque du lépreux " , "Inflige 2 points de dégats au héros " , 2 ));
+		((Joueur) joueur1).getMain().add(gnome);
 		
-		ICarte givre = new Sort ("Eclair de givre", 2, joueur1, new AttaqueCibleSort("Attaque de givre", "inflige 3 pts de dégats au personnages cible", 3));
-		((Joueur) joueur1).getMain().add(givre);
-		/*ICarte gnome = new Serviteur ("Gnôme lépreux " , 1 ,joueur1 , 1 , 1 , new AttaqueHeros ( " Attaque du lépreux " , "Inflige 2 points de dégats au héros " , 2 ));
-		((Joueur) joueur1).getMain().add(gnome);*/
-		
-		ICarte gnome = new Serviteur ("Gnôme lépreux " , 1 ,joueur2 , 1 , 1 , new AttaqueHeros ( " Attaque du lépreux " , "Inflige 2 points de dégats au héros " , 2 ));
-		
-		ICarte golem = new Serviteur ( " Golem des moissons" , 3 , joueur2 , 2 , 3 , new InvocationServiteur ( "Golemisation " , " Invoque un Golem endomage 2/1" , new Serviteur ( " Serviteur de Golem " , 0 , joueur2 , 2 , 1 ,null)));
+		ICarte golem = new Serviteur ( "Golem des moissons" , 3 , joueur2 , 2 , 3 , new InvocationServiteur ( "Golemisation " , " Invoque un Golem endomage 2/1" , new Serviteur ( " Serviteur de Golem " , 0 , joueur2 , 2 , 1 ,null)));
 		((Joueur) joueur2).getJeu().add(gnome);
 		((Joueur) joueur2).getJeu().add(golem);
 		

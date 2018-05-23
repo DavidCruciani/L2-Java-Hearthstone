@@ -71,7 +71,7 @@ public class Plateau implements IPlateau{
 		try {
 			joueur.finirTour();
 		} catch (CapaciteException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		this.getAdversaire(joueur).prendreTour();
 	}
@@ -137,7 +137,7 @@ public class Plateau implements IPlateau{
 			try {
 				partie = "Cette partie est démarée\n" + this.getJoueurCourant()+ this.getJoueurCourant().getHeros() + " affronte " + this.getAdversaire(this.getJoueurCourant()) +this.getAdversaire(this.getJoueurCourant()).getHeros() + ";\nC'est à vous : "+this.getJoueurCourant().getPseudo()+ "\n\n";
 			} catch (HearthstoneException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 		else
 			partie = "Cette partie n'est pas demarrée";

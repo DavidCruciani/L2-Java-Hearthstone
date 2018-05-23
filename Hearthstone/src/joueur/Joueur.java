@@ -217,7 +217,7 @@ public class Joueur implements IJoueur {
 			piocher();
 		}
 		catch(HearthstoneException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		Plateau.plateau().setJoueurCourant(this);
 		getHeros().getPouvoir().setDejaUtilise(false);
@@ -234,16 +234,13 @@ public class Joueur implements IJoueur {
 	 * @param cible
 	 * 				cible que le joueur veut atteindre
 	 * utilise la capacite de la carte si elle est bien sur le plateau
+	 * @throws CapaciteException 
+	 * @throws HearthstoneException 
 	 */
-	public void utiliserCarte(ICarte carte, Object cible) {
+	public void utiliserCarte(ICarte carte, Object cible) throws HearthstoneException, CapaciteException {
 		if(enJeu.contains(carte)) {
-			try {
 				carte.executerAction(cible);
 			}
-			catch(HearthstoneException | CapaciteException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
 

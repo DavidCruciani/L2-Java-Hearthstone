@@ -1,6 +1,7 @@
 package menu;
 
 import carte.ICarte;
+import exception.CapaciteException;
 import exception.HearthstoneException;
 import plateau.Plateau;
 import menu.Console;
@@ -26,8 +27,7 @@ public class InterfaceUtiliserCarte extends Interface{
 	public void executerInteraction(Plateau plateau) throws Exception {
 		ICarte carte = null;
 		Object cible = null;
-		while( carte == null)
-		{
+		//while( carte == null){
 			System.out.println("Quelle carte jouer ? (un bout de son nom)");
 			String choix = es.readLine();
 			try {
@@ -45,26 +45,32 @@ public class InterfaceUtiliserCarte extends Interface{
 					cible = plateau.getAdversaire(plateau.getJoueurCourant()).getHeros();
 				}
 				else {
-					carte = null;
-					while (carte == null) {
-						System.out.println("Quelle carte jouer ? (un bout de son nom)");
+					//carte = null;
+					//while (carte == null) {
+						System.out.println("Quelle carte attaquer ? (un bout de son nom)");
 						choix = es.readLine();
 						try {
-							cible = plateau.getJoueurCourant().getCarteEnJeu(choix);
+							cible = plateau.getAdversaire(plateau.getJoueurCourant()).getCarteEnJeu(choix);
+							
 						}
 						catch(HearthstoneException f)
 						{
 							System.out.println(f.getMessage());
 						}
-					}
+					//}
 				}
-				plateau.getJoueurCourant().utiliserCarte(carte, cible);
+				try {
+					plateau.getJoueurCourant().utiliserCarte(carte, cible);
+				}
+				catch(HearthstoneException | CapaciteException e) {
+					System.out.println(e.getMessage());
+				}
 			}
 			catch(HearthstoneException e)
 			{
 				System.out.println(e.getMessage());
 			}
-		}
+		//}
 	}
 
 }
