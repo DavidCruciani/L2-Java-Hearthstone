@@ -50,7 +50,7 @@ public class MarqueChasseur extends Capacite {
 			throw new HearthstoneException("Vise un serviteur");
 		else {
 			if(Plateau.plateau().getAdversaire( Plateau.plateau().getJoueurCourant() ).getJeu().contains( ( (Serviteur)cible) ) )
-				((Serviteur) Plateau.plateau().getAdversaire( Plateau.plateau().getJoueurCourant() ).getCarteEnJeu( (String)cible )).setPointDeVie(1);
+				((Serviteur) Plateau.plateau().getAdversaire( Plateau.plateau().getJoueurCourant() ).getCarteEnJeu( ((Serviteur) cible).getNom() )).setPointDeVie(1);
 			else
 				throw new HearthstoneException("Ta cible existe pas");
 		}

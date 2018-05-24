@@ -19,19 +19,19 @@ public class InterfaceUtiliserCarte extends Interface{
 	}
 
 	@Override
-	public boolean saisInteragir(String actionDemandee) {
+	public boolean saisInteragir(Object actionDemandee) {
 		return getDescription().equals(actionDemandee);
 	}
 
 	@Override
-	public void executerInteraction(Plateau plateau) throws Exception {
+	public void executerInteraction(Object o) throws Exception {
 		ICarte carte = null;
 		Object cible = null;
 		//while( carte == null){
 			System.out.println("Quelle carte jouer ? (un bout de son nom)");
 			String choix = es.readLine();
 			try {
-				carte = plateau.getJoueurCourant().getCarteEnJeu(choix);
+				carte = Plateau.plateau().getJoueurCourant().getCarteEnJeu(choix);
 				int ent_cible = 0;
 				while (ent_cible != 1 && ent_cible != 2)
 				{
@@ -42,7 +42,7 @@ public class InterfaceUtiliserCarte extends Interface{
 				}
 				if (ent_cible == 1)
 				{
-					cible = plateau.getAdversaire(plateau.getJoueurCourant()).getHeros();
+					cible = Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getHeros();
 				}
 				else {
 					//carte = null;
@@ -50,7 +50,7 @@ public class InterfaceUtiliserCarte extends Interface{
 						System.out.println("Quelle carte attaquer ? (un bout de son nom)");
 						choix = es.readLine();
 						try {
-							cible = plateau.getAdversaire(plateau.getJoueurCourant()).getCarteEnJeu(choix);
+							cible = Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getCarteEnJeu(choix);
 							
 						}
 						catch(HearthstoneException f)
@@ -60,7 +60,7 @@ public class InterfaceUtiliserCarte extends Interface{
 					//}
 				}
 				try {
-					plateau.getJoueurCourant().utiliserCarte(carte, cible);
+					Plateau.plateau().getJoueurCourant().utiliserCarte(carte, cible);
 				}
 				catch(HearthstoneException | CapaciteException e) {
 					System.out.println(e.getMessage());

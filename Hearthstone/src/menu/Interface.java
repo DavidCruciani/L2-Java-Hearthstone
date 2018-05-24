@@ -1,7 +1,5 @@
 package menu;
 
-import plateau.Plateau;
-
 public abstract class Interface {
 
 	private	Interface	suivant = null;
@@ -15,15 +13,15 @@ public abstract class Interface {
 	}
 
 	public abstract String getDescription();
-	public abstract boolean	saisInteragir(String actionDemandee);
-	public abstract void	executerInteraction(Plateau plateau) throws Exception;	
+	public abstract boolean	saisInteragir(Object actionDemandee);
+	public abstract void executerInteraction(Object o) throws Exception;	
 	
 	
-	public void interagir(String actionDemandees, Plateau plateau) throws Exception {
+	public void interagir(Object actionDemandees, Object o) throws Exception {
 		if (saisInteragir(actionDemandees))
-			executerInteraction(plateau);
+			executerInteraction(o);
 		else if (suivant != null)
-			suivant.interagir(actionDemandees,plateau);
+			suivant.interagir(actionDemandees,o);
 		else
 			throw new InteractionException("Il n'existe aucune interaction pour "+actionDemandees);
 	}

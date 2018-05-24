@@ -12,7 +12,7 @@ import heros.Heros;
 
 public class Main {
 	
-	private	static Interface ihm = null;
+	public static Interface ihm = null;
 	public final static Console es = new Console();
 	
 	public static ArrayList<ICarte> CarteJaina(IJoueur proprietaire)
@@ -101,12 +101,28 @@ public class Main {
 		((Joueur) joueur1).getDeck().addAll(CartesNeutres(joueur1));
 		((Joueur) joueur2).getDeck().addAll(CartesNeutres(joueur2));
 		
-		ICarte gnome = new Serviteur ("Gnôme lépreux " , 1 ,joueur1 , 1 , 1 , new AttaqueHeros ( " Attaque du lépreux " , "Inflige 2 points de dégats au héros " , 2 ));
-		((Joueur) joueur1).getJeu().add(gnome);
+		//Test Effet permanent
+		ICarte mirroir = new Sort ("Image mirroir", 1, joueur1, new ImageMirroir("Image Mirroir", "Invoque deux serviteurs de Jaina 0/+2 ayant provocation"));
+		((Joueur) joueur1).getMain().add(mirroir);
+		ICarte champion_hurlevent= new Serviteur ("Champion de Hurlevent" , 7 , joueur1 ,  6 ,6 , new EffetPermanent ( " Bonus de hurlevent " , "Effet sur les serviteurs donnant un bonus +1/+1 " , 1 , 1));
+		((Joueur) joueur1).getMain().add(champion_hurlevent);
+		ICarte givre = new Sort ("Eclair de givre", 2, joueur2, new AttaqueCibleSort("Attaque de givre", "inflige 7 pts de dégats au personnages cible", 7));
+		((Joueur) joueur2).getMain().add(givre);
 		
-		ICarte golem = new Serviteur ( "Golem des moissons" , 3 , joueur2 , 2 , 3 , new InvocationServiteur ( "Golemisation " , " Invoque un Golem endomage 2/1" , new Serviteur ( " Serviteur de Golem " , 0 , joueur2 , 2 , 1 ,null)));
+		//Test marque du chasseur
+		/*ICarte chasseur = new Sort ("Marque du Chasseur", 1, joueur1, new MarqueChasseur("Marque du chaseur","Abaisse à 1 les points de vie du serviteur ciblé" ));
+		((Joueur) joueur1).getMain().add(chasseur);*/
+		
+		//Test Pioche
+		/*ICarte busard = new Serviteur("Busard affamé", 5, joueur1, 3, 2, new Pioche("Pioche", "Pioche une carte",1) );
+		((Joueur) joueur1).getMain().add(busard);
+		ICarte arcanes = new Sort ("Intelligence des arcanes", 2, joueur1, new Pioche("Pioche","Pioche deux cartes",2));
+		((Joueur) joueur1).getMain().add(arcanes);*/
+		
+		
+		/*ICarte golem = new Serviteur ( "Golem des moissons" , 3 , joueur2 , 2 , 3 , new InvocationServiteur ( "Golemisation " , " Invoque un Golem endomage 2/1" , new Serviteur ( " Serviteur de Golem " , 0 , joueur2 , 2 , 1 ,null)));
 		//((Joueur) joueur2).getJeu().add(gnome);
-		((Joueur) joueur2).getJeu().add(golem);
+		((Joueur) joueur2).getJeu().add(golem);*/
 		
 		// Création plateau
 		try {
@@ -194,6 +210,7 @@ public class Main {
 	private static Interface initialiserInterfaces() {
 		Interface monInterface = null;
 		monInterface = new InterfaceQuitter(monInterface);
+		monInterface = new InterfaceChasseur(monInterface);
 		monInterface = new InterfaceFinirTour(monInterface);
 		monInterface = new InterfaceJouerCarte(monInterface);
 		monInterface = new InterfaceUtiliserCarte(monInterface);

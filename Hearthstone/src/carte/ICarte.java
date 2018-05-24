@@ -1,5 +1,6 @@
 package carte;
 
+import capacite.ICapacite;
 import exception.CapaciteException;
 import exception.HearthstoneException;
 import joueur.IJoueur;
@@ -13,4 +14,5 @@ public interface ICarte {
     public abstract int getCout();
     public abstract String getNom();
     public abstract IJoueur getProprietaire();
+	public abstract ICapacite getCapacite();
 }

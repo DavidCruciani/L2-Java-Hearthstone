@@ -1,6 +1,7 @@
 package capacite;
 
 import carte.Serviteur;
+import joueur.IJoueur;
 import plateau.Plateau;
 
 /**
@@ -20,6 +21,12 @@ public class ImageMirroir extends InvocationServiteur {
 	 * Invoque un serviteur au joueur courant
 	 */
 	public void executerEffetMiseEnJeu(Object cible) {
-		Plateau.plateau().getJoueurCourant().getJeu().add(this.getInvocation());
+		IJoueur joueur_courant=Plateau.plateau().getJoueurCourant();
+		
+		Serviteur invoque1= new Serviteur("Serviteur de Jaina", 0 , joueur_courant , 0 , 2 , new Provocation());
+		Serviteur invoque2= (Serviteur) invoque1.clone();
+		
+		joueur_courant.getJeu().add(invoque1);
+		joueur_courant.getJeu().add(invoque2);
 	}
 }

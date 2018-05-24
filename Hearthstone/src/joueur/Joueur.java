@@ -120,9 +120,6 @@ public class Joueur implements IJoueur {
 		if(!main.contains(carte)) throw new HearthstoneException("Carte pas en Main");
 		if(!(this.getMana() >= carte.getCout())) throw new HearthstoneException("Pas mana");
 		if(carte instanceof Serviteur) {
-			enJeu.add(carte);
-			main.remove(carte);
-			this.mana -= carte.getCout();
 			try {
 				carte.executerEffetDebutMiseEnJeu(null);
 			}
@@ -132,18 +129,32 @@ public class Joueur implements IJoueur {
 				this.getJeu().remove(carte);
 				throw new HearthstoneException("Pas de cible");
 			}
+			enJeu.add(carte);
+			main.remove(carte);
+			this.mana -= carte.getCout();
+			/*try {
+				carte.executerEffetDebutMiseEnJeu(null);
+			}
+			catch (HearthstoneException e) {
+				this.mana = this.mana + carte.getCout();
+				this.main.add(carte);
+				this.getJeu().remove(carte);
+				throw new HearthstoneException("Pas de cible");
+			}*/
 		}
 		else if(carte instanceof Sort){
-			this.mana -= carte.getCout();
-			main.remove(carte);
 			try {
 				carte.executerEffetDebutMiseEnJeu(null);
+				this.mana -= carte.getCout();
+				main.remove(carte);
 			}
 			catch (HearthstoneException e) {
 				this.mana = this.mana + carte.getCout();
 				this.main.add(carte);
 				throw new HearthstoneException("Pas de cible");
 			}
+			
+			
 		}
 		
 	}
@@ -159,24 +170,32 @@ public class Joueur implements IJoueur {
 	 * @throws CapaciteException 
 	 */
 	public void jouerCarte(ICarte carte, Object cible) throws HearthstoneException, CapaciteException {
-		if( main.contains(carte) ){
+		if(! main.contains(carte) )
+			throw new HearthstoneException("Carte pas en Main");
+		else {
 			if(this.getMana() >= carte.getCout()) {
 				if(carte instanceof Serviteur) {
+					carte.executerEffetDebutMiseEnJeu(cible);
 					enJeu.add(carte);
 					main.remove(carte);
-					carte.executerEffetDebutMiseEnJeu(cible);
 					this.mana -= carte.getCout();
 				}
 				else if(carte instanceof Sort){
-					carte.executerEffetDebutMiseEnJeu(cible);
-					this.mana -= carte.getCout();
-					main.remove(carte);
+					try {
+						carte.executerEffetDebutMiseEnJeu(cible);
+						this.mana -= carte.getCout();
+						main.remove(carte);
+					}
+					catch (HearthstoneException e) {
+						this.mana = this.mana + carte.getCout();
+						this.main.add(carte);
+						throw new HearthstoneException("Pas de cible");
+					}
+					
 				}
 			}
 			else throw new HearthstoneException("pas mana");
 		}
-		else
-			throw new HearthstoneException("Carte pas en Main");
 	}
 
 	/**
@@ -185,8 +204,15 @@ public class Joueur implements IJoueur {
 	 * retire du plateau la carte choisie si elle existe bien sur le plateau
 	 */
 	public void perdreCarte(ICarte carte) throws HearthstoneException {
-		if(enJeu.contains(carte)) 
+		if(enJeu.contains(carte)) {
+			try {
+				System.out.println("tst2");
+				((Serviteur) carte).executerEffetDisparition(null);
+			} catch (CapaciteException e) {
+				System.out.println(e.getMessage());
+			}
 			enJeu.remove(carte);
+		}
 		else
 			throw new HearthstoneException("Carte pas en Jeu");
 	}

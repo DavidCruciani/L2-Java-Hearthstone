@@ -1,10 +1,6 @@
 package menu;
 
-import plateau.Plateau;
-import menu.Console;
-
 public class InterfaceQuitter extends Interface {
-	public final static Console es = new Console();
 	public InterfaceQuitter(Interface ihm) {
 		super(ihm);
 	}
@@ -15,12 +11,12 @@ public class InterfaceQuitter extends Interface {
 	}
 
 	@Override
-	public boolean saisInteragir(String actionDemandee) {
+	public boolean saisInteragir(Object actionDemandee) {
 		return getDescription().equals(actionDemandee);
 	}
 
-	public void executerInteraction(Plateau plateau) throws Exception {
-		es.println("Au revoir");
+	public void executerInteraction(Object o) throws Exception {
+		System.out.println("Au revoir");
 		System.exit(0);
 	}
 

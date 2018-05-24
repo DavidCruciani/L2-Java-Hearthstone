@@ -1,7 +1,5 @@
 package menu;
 
-import plateau.Plateau;
-
 public class InterfaceCible extends Interface {
 
 	public final static Console es = new Console();
@@ -15,12 +13,12 @@ public class InterfaceCible extends Interface {
 	}
 
 	@Override
-	public boolean saisInteragir(String actionDemandee) {
+	public boolean saisInteragir(Object actionDemandee) {
 		return getDescription().equals(actionDemandee);
 	}
 
 	@Override
-	public void executerInteraction(Plateau plateau) throws Exception {
+	public void executerInteraction(Object o) throws Exception {
 		int cible = 0;
 		while (cible != 1 && cible != 2)
 		{

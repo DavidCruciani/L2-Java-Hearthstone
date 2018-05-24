@@ -1,6 +1,5 @@
 package menu;
 
-import carte.ICarte;
 import exception.HearthstoneException;
 import plateau.Plateau;
 
@@ -17,16 +16,16 @@ public class InterfaceUtiliserPouvoir extends Interface {
 	}
 
 	@Override
-	public boolean saisInteragir(String actionDemandee) {
+	public boolean saisInteragir(Object actionDemandee) {
 		return getDescription().equals(actionDemandee);
 	}
 
 	@Override
-	public void executerInteraction(Plateau plateau) throws Exception {
+	public void executerInteraction(Object o) throws Exception {
 		//ICarte carte = null;
 
 		try {
-			plateau.getJoueurCourant().utiliserPouvoir(null);
+			Plateau.plateau().getJoueurCourant().utiliserPouvoir(null);
 		}
 		catch(IllegalArgumentException e) {
 			int ent_cible = 0;
@@ -42,7 +41,7 @@ public class InterfaceUtiliserPouvoir extends Interface {
 			}
 			if (ent_cible == 1)
 			{
-				cible = plateau.getAdversaire(plateau.getJoueurCourant()).getHeros();
+				cible = Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getHeros();
 			}
 			else {
 				/*carte = null;
@@ -50,7 +49,7 @@ public class InterfaceUtiliserPouvoir extends Interface {
 					System.out.println("Quelle carte visez-vous ?");
 					choix = es.readLine();
 					try {
-						cible = plateau.getAdversaire(plateau.getJoueurCourant()).getCarteEnJeu(choix);
+						cible = Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getCarteEnJeu(choix);
 					}
 					catch(HearthstoneException f)
 					{
@@ -59,7 +58,7 @@ public class InterfaceUtiliserPouvoir extends Interface {
 				//}
 			}
 			try {		
-				plateau.getJoueurCourant().utiliserPouvoir(cible);
+				Plateau.plateau().getJoueurCourant().utiliserPouvoir(cible);
 			}
 			catch(HearthstoneException f) {
 				System.out.println(f.getMessage());

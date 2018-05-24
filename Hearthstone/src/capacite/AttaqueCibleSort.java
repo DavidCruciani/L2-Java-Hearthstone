@@ -50,7 +50,12 @@ public class AttaqueCibleSort extends Capacite {
 		if(cible instanceof Serviteur) {
 			((Serviteur)cible).estAttaquer(degas);
 			if( ((Serviteur)cible).disparait() ) {
-				Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).perdreCarte( ((ICarte)cible) );
+				try {
+					Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).perdreCarte( ((ICarte)cible) );
+				}
+				catch(HearthstoneException e) {
+					System.out.println(e.getMessage());
+				}
 			}
 		}
 		setDejaUtilise(true);

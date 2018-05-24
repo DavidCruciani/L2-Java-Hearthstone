@@ -1,6 +1,7 @@
 package menu;
 
 import plateau.Plateau;
+import capacite.MarqueChasseur;
 import carte.ICarte;
 import exception.HearthstoneException;
 import menu.Console;
@@ -19,12 +20,12 @@ public class InterfaceJouerCarte extends Interface{
 	}
 
 	@Override
-	public boolean saisInteragir(String actionDemandee) {
+	public boolean saisInteragir(Object actionDemandee) {
 		return getDescription().equals(actionDemandee);
 	}
 
 	@Override
-	public void executerInteraction(Plateau plateau) throws Exception {
+	public void executerInteraction(Object o) throws Exception {
 		
 		Object cible = null;
 		ICarte carte = null;
@@ -33,47 +34,52 @@ public class InterfaceJouerCarte extends Interface{
 			System.out.println("Quelle carte jouer ? (un bout de son nom)");
 			String choix = es.readLine();
 			try {
-				carte = plateau.getJoueurCourant().getCarteEnMain(choix);
+				carte = Plateau.plateau().getJoueurCourant().getCarteEnMain(choix);
+				System.out.println(carte.toString());
 			}
 			catch(HearthstoneException e)
 			{
 				System.out.println(e.getMessage());
 			}
 		}
-		try {
-			
-			plateau.getJoueurCourant().jouerCarte(carte);
+		if(carte.getCapacite() instanceof MarqueChasseur) {
+			application.Main.ihm.interagir(carte, carte);
 		}
-		catch (HearthstoneException e){
-			int ent_cible = 0;
-			while (ent_cible != 1 && ent_cible != 2)
-			{
-				System.out.println("Quelle est votre cible ?\n");
-				System.out.println("1. Le héros\n");
-				System.out.println("2. Une autre carte\n");
-				ent_cible = es.readInt();
+		else {
+			try {
+				
+				Plateau.plateau().getJoueurCourant().jouerCarte(carte);
 			}
-			if (ent_cible == 1)
-			{
-				cible = plateau.getAdversaire(plateau.getJoueurCourant()).getHeros();
-			}
-			else {
-				carte = null;
-				while (carte == null) {
-					System.out.println("Quelle carte visez-vous ?");
-					String choix = es.readLine();
-					try {
-						cible = plateau.getAdversaire(plateau.getJoueurCourant()).getCarteEnJeu(choix);
-					}
-					catch(HearthstoneException f)
-					{
-						System.out.println(f.getMessage());
-					}
+			catch (HearthstoneException | IllegalArgumentException e){
+				int ent_cible = 0;
+				while (ent_cible != 1 && ent_cible != 2)
+				{
+					System.out.println("Quelle est votre cible ?\n");
+					System.out.println("1. Le héros\n");
+					System.out.println("2. Une autre carte\n");
+					ent_cible = es.readInt();
 				}
+				if (ent_cible == 1)
+				{
+					cible = Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getHeros();
+				}
+				else {
+					//carte = null;
+					//while (carte == null) {
+						System.out.println("Quelle carte visez-vous ?");
+						String choix = es.readLine();
+						try {
+							cible = Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getCarteEnJeu(choix);
+							System.out.println(cible.toString());
+						}
+						catch(HearthstoneException f)
+						{
+							System.out.println(f.getMessage());
+						}
+					//}
+				}
+				Plateau.plateau().getJoueurCourant().jouerCarte(carte, cible);
 			}
-			plateau.getJoueurCourant().jouerCarte(carte, cible);
 		}
-		
 	}
-
 }

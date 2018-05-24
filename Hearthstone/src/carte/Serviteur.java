@@ -28,6 +28,14 @@ public class Serviteur extends Carte{
 		this.setCapacite(capacite);
 	}
 	
+	public Serviteur ( Serviteur serviteur)
+	{
+		super(serviteur.getNom() , serviteur.getCout() , serviteur.getProprietaire());
+		this.attaque=serviteur.getAttaque();
+		this.pdv=serviteur.getPointDeVie();
+		this.capacite=serviteur.getCapacite();
+	}
+
 	public int getAttaque() {
 		return this.attaque;
 	}
@@ -66,6 +74,11 @@ public class Serviteur extends Carte{
 	public void setCapacite(ICapacite capacite) {
 		this.capacite = capacite;
 	}
+	
+	public final Object clone (){
+		return new Serviteur(this);
+	}
+	
 	/**
 	 * @return true si la vie de la carte est inferieur ou egale a 0
 	 */

@@ -1,5 +1,6 @@
 package capacite;
 
+import carte.ICarte;
 import carte.Serviteur;
 import exception.HearthstoneException;
 import plateau.Plateau;
@@ -23,10 +24,20 @@ public class InvocationChien extends InvocationServiteur{
 	 * @throws HearthstoneException 
 	 */
 	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
-		if( Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant() ).getJeu().size() != 0 ) {
-			for(int i=1;i<= Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant() ).getJeu().size();i++ ) {
-				Plateau.plateau().getJoueurCourant().getJeu().add(this.getInvocation());
-			}
-		}
+		 int nb_serviteurs=0;
+		 for ( ICarte c : Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu())
+		 {
+		 	if(c instanceof Serviteur)
+		 		nb_serviteurs++;
+		 }
+		 
+		 for(int i=0;i<nb_serviteurs;i++)
+		 {
+		 	Serviteur serviteur = (Serviteur) getInvocation().clone();
+		 	serviteur.setProprietaire(Plateau.plateau().getJoueurCourant());
+		 	serviteur.setNom(serviteur.getNom() + " " + i+1);
+		 	Plateau.plateau().getJoueurCourant().getJeu().add(serviteur);
+	
+}
 	}
 }

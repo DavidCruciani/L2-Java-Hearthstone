@@ -18,12 +18,12 @@ public class InterfaceFinirTour extends Interface {
 	}
 
 	@Override
-	public boolean saisInteragir(String actionDemandee) {
+	public boolean saisInteragir(Object actionDemandee) {
 		return getDescription().equals(actionDemandee);
 	}
 
-	public void executerInteraction(Plateau plateau) throws Exception {
-		plateau.finTour(plateau.getJoueurCourant());
+	public void executerInteraction(Object o) throws Exception {
+		Plateau.plateau().finTour(Plateau.plateau().getJoueurCourant());
 	}
 
 }
