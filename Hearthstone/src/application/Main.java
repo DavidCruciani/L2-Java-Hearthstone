@@ -101,13 +101,21 @@ public class Main {
 		((Joueur) joueur1).getDeck().addAll(CartesNeutres(joueur1));
 		((Joueur) joueur2).getDeck().addAll(CartesNeutres(joueur2));
 		
+		//Test Charge
+		ICarte missiliere= new Serviteur ("La missilière témeraire " , 6 , joueur1 , 5 ,  2 , new Charge ());
+		((Joueur) joueur1).getMain().add(missiliere);
+		ICarte charge = new Sort("Charge" , 1 , joueur1 , new Charge());
+		((Joueur) joueur1).getMain().add(charge);
+		ICarte champion_hurlevent= new Serviteur ("Champion de Hurlevent" , 7 , joueur1 ,  6 ,6 , new EffetPermanent ( " Bonus de hurlevent " , "Effet sur les serviteurs donnant un bonus +1/+1 " , 1 , 1));
+		((Joueur) joueur1).getJeu().add(champion_hurlevent);
+		
 		//Test Effet permanent
-		ICarte mirroir = new Sort ("Image mirroir", 1, joueur1, new ImageMirroir("Image Mirroir", "Invoque deux serviteurs de Jaina 0/+2 ayant provocation"));
+		/*ICarte mirroir = new Sort ("Image mirroir", 1, joueur1, new ImageMirroir("Image Mirroir", "Invoque deux serviteurs de Jaina 0/+2 ayant provocation"));
 		((Joueur) joueur1).getMain().add(mirroir);
 		ICarte champion_hurlevent= new Serviteur ("Champion de Hurlevent" , 7 , joueur1 ,  6 ,6 , new EffetPermanent ( " Bonus de hurlevent " , "Effet sur les serviteurs donnant un bonus +1/+1 " , 1 , 1));
 		((Joueur) joueur1).getMain().add(champion_hurlevent);
 		ICarte givre = new Sort ("Eclair de givre", 2, joueur2, new AttaqueCibleSort("Attaque de givre", "inflige 7 pts de dégats au personnages cible", 7));
-		((Joueur) joueur2).getMain().add(givre);
+		((Joueur) joueur2).getMain().add(givre);*/
 		
 		//Test marque du chasseur
 		/*ICarte chasseur = new Sort ("Marque du Chasseur", 1, joueur1, new MarqueChasseur("Marque du chaseur","Abaisse à 1 les points de vie du serviteur ciblé" ));
