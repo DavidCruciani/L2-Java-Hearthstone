@@ -2,6 +2,8 @@ package plateau;
 
 import java.util.ArrayList;
 
+import application.Main;
+import carte.ICarte;
 import exception.CapaciteException;
 import exception.HearthstoneException;
 import java.lang.Math;
@@ -40,7 +42,6 @@ public class Plateau implements IPlateau{
 	 */
 	public void ajouterJoueur(IJoueur joueur) throws HearthstoneException {
 		if (joueur == null) throw new HearthstoneException("Joueur vide");
-		// indexage dans arraylist ??
 		if  (joueurs.size() == 2) throw new HearthstoneException("Dejà deux joueurs");
 		joueurs.add(joueur);
 	}
@@ -131,15 +132,34 @@ public class Plateau implements IPlateau{
 	 * @return les infos sur la partie, sur le joueur courant
 	 */
 	public String toString() {
-		// A Completer
 		String partie = null;
-		if (this.estDemaree())
-			try {
-				partie = "Cette partie est démarée\n" + this.getJoueurCourant()+ this.getJoueurCourant().getHeros() + " affronte " + this.getAdversaire(this.getJoueurCourant()) +this.getAdversaire(this.getJoueurCourant()).getHeros() + ";\nC'est à vous : "+this.getJoueurCourant().getPseudo()+ "\n\n";
-			} catch (HearthstoneException e) {
-				System.out.println(e.getMessage());
+		if (this.estDemaree()) {
+			partie = "Partie démarrée\n"+ getJoueurCourant().getPseudo() + " - " +getJoueurCourant().getHeros()+"\n\nVotre main :\n";
+			partie += "######################################################\n";
+			for(ICarte carte: getMainJoueurCourant())
+			{
+				partie += carte.toString();
 			}
-		else
+			partie += "######################################################\n";
+
+			partie += "\nCartes en jeu :";
+			partie += "\n=====================================================\n";
+			for(ICarte carte: getJoueurCourant().getJeu())
+			{
+				partie += carte.toString();
+			}
+			partie += "\n\n======================\n\n";
+			for(ICarte carte: getJeuAdversaire())
+			{
+				partie += carte.toString();
+			}
+			partie += "\n=====================================================\n\n";
+			try {
+				partie += getAdversaire(getJoueurCourant()).getPseudo() + " - " +getAdversaire(getJoueurCourant()).getHeros() + "\n";
+			} catch (HearthstoneException e) {
+				e.printStackTrace();
+			}
+		} else
 			partie = "Cette partie n'est pas demarrée";
 		return partie;
 	}
@@ -147,5 +167,16 @@ public class Plateau implements IPlateau{
 	public ArrayList<IJoueur> getJoueurs(){
 		return this.joueurs;
 	}
-
+	
+	public ArrayList<ICarte> getMainJoueurCourant(){
+		return this.getJoueurCourant().getMain();
+	}
+	public ArrayList<ICarte> getJeuAdversaire(){
+		try {
+			return this.getAdversaire(getJoueurCourant()).getJeu();
+		} catch (HearthstoneException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

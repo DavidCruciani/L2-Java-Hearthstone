@@ -109,7 +109,7 @@ public class Main {
 		ICarte champion_hurlevent= new Serviteur ("Champion de Hurlevent" , 7 , joueur1 ,  6 ,6 , new EffetPermanent ( " Bonus de hurlevent " , "Effet sur les serviteurs donnant un bonus +1/+1 " , 1 , 1));
 		((Joueur) joueur1).getJeu().add(champion_hurlevent);
 		
-		System.out.println("jeu joueur1 : " + ((Joueur) joueur1).getJeu().size());
+		//System.out.println("jeu joueur1 : " + ((Joueur) joueur1).getJeu().size());
 		
 		//Test Effet permanent
 		/*ICarte mirroir = new Sort ("Image mirroir", 1, joueur1, new ImageMirroir("Image Mirroir", "Invoque deux serviteurs de Jaina 0/+2 ayant provocation"));
@@ -161,7 +161,7 @@ public class Main {
 		
 		while (true) {
 			
-			
+			/*
 			for (ICarte carte : joueur1.getMain()) {
 				System.out.println("main1");
 				System.out.println(carte.toString());
@@ -170,11 +170,11 @@ public class Main {
 				System.out.println("main2");
 				System.out.println(carte.toString());
 			}
-			
+			*/
 			
 			System.out.println(Plateau.plateau().toString());
 			
-			System.out.println("jeu joueur1 : " + ((Joueur) joueur1).getJeu().size());
+			//System.out.println("jeu joueur1 : " + ((Joueur) joueur1).getJeu().size());
 
 			String choix = menu();
 			try {
@@ -183,7 +183,7 @@ public class Main {
 				e.printStackTrace();
 			}
 			
-			
+			/*
 			for (ICarte carte : joueur1.getJeu()) {
 				System.out.println("jeu");
 				System.out.println(carte.toString());
@@ -191,7 +191,7 @@ public class Main {
 			for (ICarte carte : joueur2.getJeu()) {
 				System.out.println("jeu2");
 				System.out.println(carte.toString());
-			}
+			}*/
 			
 			
 		}
@@ -203,7 +203,8 @@ public class Main {
 		ArrayList<String>	menu = new ArrayList<String>();
 		Interface i = ihm;
 		while (i != null) {
-			menu.add(i.getDescription());
+			if (i.getDescription() != null)
+				menu.add(i.getDescription());
 			i = i.getSuivant();
 		}
 		

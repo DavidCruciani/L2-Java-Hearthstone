@@ -92,7 +92,7 @@ public class Joueur implements IJoueur {
 			//System.out.println("= getCarteEnJeu ==============================================");
 			//System.out.println("nomCarte : " + nomCarte + "this.enJeu : " + this.enJeu.size());
 			for (ICarte carte : this.enJeu) {
-				System.out.println(carte.getNom() + carte.getNom().contains(nomCarte));
+				//System.out.println(carte.getNom() + carte.getNom().contains(nomCarte));
 				if(carte.getNom().contains(nomCarte)) 
 				{
 				//	System.out.println("= return ==============================================");
