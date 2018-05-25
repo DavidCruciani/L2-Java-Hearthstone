@@ -19,7 +19,7 @@ import plateau.Plateau;
 
 public class Joueur implements IJoueur {
 	private String pseudo;
-	private int mana = 50;
+	private int mana = 0;
 	private int stockMana = 0;
 	private ArrayList<ICarte> deck = new ArrayList<ICarte>();
 	private ArrayList<ICarte> main = new ArrayList<ICarte>();
@@ -215,7 +215,7 @@ public class Joueur implements IJoueur {
 	public void perdreCarte(ICarte carte) throws HearthstoneException {
 		if(enJeu.contains(carte)) {
 			try {
-				System.out.println("tst2");
+				//System.out.println("tst2");
 				((Serviteur) carte).executerEffetDisparition(null);
 			} catch (CapaciteException e) {
 				System.out.println(e.getMessage());

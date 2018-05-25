@@ -101,13 +101,22 @@ public class Main {
 		((Joueur) joueur1).getDeck().addAll(CartesNeutres(joueur1));
 		((Joueur) joueur2).getDeck().addAll(CartesNeutres(joueur2));
 		
+		//Test Attaque total
+		ICarte flamme =new Sort("Choc de Flamme ", 7 , joueur1 ,new AttaqueTotale("Attaque massive","inflige 4 pts de dégats a tous les serviteurs adverses ", 4));
+		((Joueur) joueur1).getMain().add(flamme);
+		ICarte golem = new Serviteur ( "Golem des moissons" , 3 , joueur2 , 2 , 3 , new InvocationServiteur ( "Golemisation " , " Invoque un Golem endomage 2/1" , new Serviteur ( " Serviteur de Golem " , 0 , joueur2 , 2 , 1 ,null)));
+		ICarte gnome = new Serviteur ("Gnôme lépreux " , 1 ,joueur2 , 1 , 1 , new AttaqueHeros ( " Attaque du lépreux " , "Inflige 2 points de dégats au héros " , 2 ));
+		((Joueur) joueur2).getJeu().add(gnome);
+		((Joueur) joueur2).getJeu().add(golem);
+		
+		
 		//Test Charge
-		ICarte missiliere= new Serviteur ("La missilière témeraire " , 6 , joueur1 , 5 ,  2 , new Charge ());
+		/*ICarte missiliere= new Serviteur ("La missilière témeraire " , 6 , joueur1 , 5 ,  2 , new Charge ());
 		((Joueur) joueur1).getMain().add(missiliere);
 		ICarte charge = new Sort("Charge" , 1 , joueur1 , new Charge());
 		((Joueur) joueur1).getMain().add(charge);
 		ICarte champion_hurlevent= new Serviteur ("Champion de Hurlevent" , 7 , joueur1 ,  6 ,6 , new EffetPermanent ( " Bonus de hurlevent " , "Effet sur les serviteurs donnant un bonus +1/+1 " , 1 , 1));
-		((Joueur) joueur1).getJeu().add(champion_hurlevent);
+		((Joueur) joueur1).getJeu().add(champion_hurlevent);*/
 		
 		//System.out.println("jeu joueur1 : " + ((Joueur) joueur1).getJeu().size());
 		
@@ -120,8 +129,8 @@ public class Main {
 		((Joueur) joueur2).getMain().add(givre);*/
 		
 		//Test marque du chasseur
-		ICarte chasseur = new Sort ("Marque du Chasseur", 1, joueur1, new MarqueChasseur("Marque du chaseur","Abaisse à 1 les points de vie du serviteur ciblé" ));
-		((Joueur) joueur2).getMain().add(chasseur);
+		/*ICarte chasseur = new Sort ("Marque du Chasseur", 1, joueur1, new MarqueChasseur("Marque du chaseur","Abaisse à 1 les points de vie du serviteur ciblé" ));
+		((Joueur) joueur2).getMain().add(chasseur);*/
 		
 		//Test Pioche
 		/*ICarte busard = new Serviteur("Busard affamé", 5, joueur1, 3, 2, new Pioche("Pioche", "Pioche une carte",1) );

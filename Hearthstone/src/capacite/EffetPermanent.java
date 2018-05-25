@@ -37,9 +37,9 @@ public class EffetPermanent extends Capacite {
 	 * @throws HearthstoneException 
 	 */
 	public void executerEffetDisparition(Object cible) throws HearthstoneException {
-		System.out.println("tst3");
+		//System.out.println("tst3");
 		for(ICarte carte : Plateau.plateau().getJoueurCourant().getJeu() ) {
-			System.out.println("tst");
+			//System.out.println("tst");
 			((Serviteur)carte).setPointDeVieBonus(((Serviteur)carte).getPointDeVie()-this.vieBonus);
 			((Serviteur)carte).setAttaqueBonus(((Serviteur)carte).getAttaque()-this.attaqueBonus);
 		}

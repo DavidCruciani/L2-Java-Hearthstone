@@ -64,14 +64,6 @@ public class InterfaceUtiliserPouvoir extends Interface {
 				System.out.println(f.getMessage());
 			}
 		}
-		
-		
-		/*try {		
-			plateau.getJoueurCourant().utiliserPouvoir(cible);
-		}
-		catch(HearthstoneException f) {
-			System.out.println(f.getMessage());
-		}*/
 	}
 
 }

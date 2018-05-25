@@ -1,10 +1,12 @@
 package capacite;
 
-import carte.ICarte;
+import java.util.ArrayList;
+
 import carte.Serviteur;
 import exception.CapaciteException;
 import exception.HearthstoneException;
 import plateau.Plateau;
+import carte.ICarte;
 
 /**
  * AttaqueTotale est une classe issue de la classe Capacite
@@ -42,7 +44,7 @@ public class AttaqueTotale extends Capacite {
 	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
 		if(getDejaUtilise())
 			throw new IllegalArgumentException("Capacite deja utilise");
-		for(int i=0;i<Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().size();i++ ){
+		/*for(int i=0;i<Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().size();i++ ){
 			((Serviteur) Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().get(i)).estAttaquer(degas);
 		}
 		
@@ -50,7 +52,19 @@ public class AttaqueTotale extends Capacite {
 			if( ((Serviteur) Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().get(i)).disparait() ) {
 				Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).perdreCarte(Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().get(i));
 			}
+		}*/
+		
+		ArrayList<ICarte> copieJeu=(ArrayList<ICarte>) Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().clone();
+		for(ICarte carte : copieJeu) {
+			if(carte instanceof Serviteur) {
+				((Serviteur) carte).estAttaquer(degas);
+				if( ((Serviteur) carte).disparait() ) {
+					Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).perdreCarte(carte);
+				}
+			}
 		}
+				
+				
 		setDejaUtilise(true);
 	}
 

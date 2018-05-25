@@ -76,7 +76,7 @@ public class InterfaceJouerCarte extends Interface{
 						String choix = es.readLine();
 						try {
 							cible = Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getCarteEnJeu(choix);
-							System.out.println(cible.toString());
+							//System.out.println(cible.toString());
 						}
 						catch(HearthstoneException f)
 						{

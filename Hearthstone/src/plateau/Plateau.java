@@ -2,7 +2,6 @@ package plateau;
 
 import java.util.ArrayList;
 
-import application.Main;
 import carte.ICarte;
 import exception.CapaciteException;
 import exception.HearthstoneException;
@@ -134,7 +133,7 @@ public class Plateau implements IPlateau{
 	public String toString() {
 		String partie = null;
 		if (this.estDemaree()) {
-			partie = "Partie démarrée\n"+ getJoueurCourant().getPseudo() + " - " +getJoueurCourant().getHeros()+"\n\nVotre main :\n";
+			partie = "Partie démarrée\n"+ getJoueurCourant().toString() + " - " +getJoueurCourant().getHeros()+"\n\nVotre main :\n";
 			partie += "######################################################\n";
 			for(ICarte carte: getMainJoueurCourant())
 			{
@@ -155,7 +154,7 @@ public class Plateau implements IPlateau{
 			}
 			partie += "\n=====================================================\n\n";
 			try {
-				partie += getAdversaire(getJoueurCourant()).getPseudo() + " - " +getAdversaire(getJoueurCourant()).getHeros() + "\n";
+				partie += getAdversaire(getJoueurCourant()).toString() + " - " +getAdversaire(getJoueurCourant()).getHeros() + "\n";
 			} catch (HearthstoneException e) {
 				e.printStackTrace();
 			}
