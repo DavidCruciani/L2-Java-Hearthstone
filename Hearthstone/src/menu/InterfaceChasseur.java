@@ -31,10 +31,13 @@ public class InterfaceChasseur extends Interface {
 		Object cible = null;
 		while (cible == null)
 		{
-			System.out.println("Quelle carte viser ? (un bout de son nom)");
+		//	System.out.println("jeu joueur1 : " + ((Joueur) joueur1).getJeu().size());
+
+			System.out.println("Quelle carte viser ? (un bout de son nom)-- interface chasseur");
 			String choix = es.readLine();
 			try {
 				cible = Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getCarteEnJeu(choix);
+				//System.out.println(cible.toString());
 			}
 			catch(HearthstoneException e)
 			{

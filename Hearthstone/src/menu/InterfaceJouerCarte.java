@@ -1,6 +1,7 @@
 package menu;
 
 import plateau.Plateau;
+import capacite.Charge;
 import capacite.MarqueChasseur;
 import carte.ICarte;
 import exception.HearthstoneException;
@@ -35,7 +36,7 @@ public class InterfaceJouerCarte extends Interface{
 			String choix = es.readLine();
 			try {
 				carte = Plateau.plateau().getJoueurCourant().getCarteEnMain(choix);
-				System.out.println(carte.toString());
+				//System.out.println(carte.toString());
 			}
 			catch(HearthstoneException e)
 			{
@@ -43,6 +44,11 @@ public class InterfaceJouerCarte extends Interface{
 			}
 		}
 		if(carte.getCapacite() instanceof MarqueChasseur) {
+			//System.out.println("on y est____ ou pas... version MC :P");
+			application.Main.ihm.interagir(carte, carte);
+		}
+		else if (carte.getCapacite() instanceof Charge ) {
+			//System.out.println("on y est____ ou pas... :P");
 			application.Main.ihm.interagir(carte, carte);
 		}
 		else {

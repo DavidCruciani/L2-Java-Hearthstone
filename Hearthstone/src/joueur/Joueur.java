@@ -89,10 +89,19 @@ public class Joueur implements IJoueur {
 	 * @return la carte souhaite si elle existe bien sur le plateau
 	 */
 	public ICarte getCarteEnJeu(String nomCarte) throws HearthstoneException {
+			//System.out.println("= getCarteEnJeu ==============================================");
+			//System.out.println("nomCarte : " + nomCarte + "this.enJeu : " + this.enJeu.size());
 			for (ICarte carte : this.enJeu) {
+				System.out.println(carte.getNom() + carte.getNom().contains(nomCarte));
 				if(carte.getNom().contains(nomCarte)) 
+				{
+				//	System.out.println("= return ==============================================");
+
 					return carte;
+				}
 			}
+			//System.out.println("= Exception ==============================================");
+
 			throw new HearthstoneException("Carte pas en Jeu");
 	}
 

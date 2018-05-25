@@ -109,6 +109,8 @@ public class Main {
 		ICarte champion_hurlevent= new Serviteur ("Champion de Hurlevent" , 7 , joueur1 ,  6 ,6 , new EffetPermanent ( " Bonus de hurlevent " , "Effet sur les serviteurs donnant un bonus +1/+1 " , 1 , 1));
 		((Joueur) joueur1).getJeu().add(champion_hurlevent);
 		
+		System.out.println("jeu joueur1 : " + ((Joueur) joueur1).getJeu().size());
+		
 		//Test Effet permanent
 		/*ICarte mirroir = new Sort ("Image mirroir", 1, joueur1, new ImageMirroir("Image Mirroir", "Invoque deux serviteurs de Jaina 0/+2 ayant provocation"));
 		((Joueur) joueur1).getMain().add(mirroir);
@@ -118,8 +120,8 @@ public class Main {
 		((Joueur) joueur2).getMain().add(givre);*/
 		
 		//Test marque du chasseur
-		/*ICarte chasseur = new Sort ("Marque du Chasseur", 1, joueur1, new MarqueChasseur("Marque du chaseur","Abaisse à 1 les points de vie du serviteur ciblé" ));
-		((Joueur) joueur1).getMain().add(chasseur);*/
+		ICarte chasseur = new Sort ("Marque du Chasseur", 1, joueur1, new MarqueChasseur("Marque du chaseur","Abaisse à 1 les points de vie du serviteur ciblé" ));
+		((Joueur) joueur2).getMain().add(chasseur);
 		
 		//Test Pioche
 		/*ICarte busard = new Serviteur("Busard affamé", 5, joueur1, 3, 2, new Pioche("Pioche", "Pioche une carte",1) );
@@ -171,6 +173,9 @@ public class Main {
 			
 			
 			System.out.println(Plateau.plateau().toString());
+			
+			System.out.println("jeu joueur1 : " + ((Joueur) joueur1).getJeu().size());
+
 			String choix = menu();
 			try {
 				ihm.interagir(choix, Plateau.plateau());
@@ -218,6 +223,8 @@ public class Main {
 	private static Interface initialiserInterfaces() {
 		Interface monInterface = null;
 		monInterface = new InterfaceQuitter(monInterface);
+		monInterface = new InterfaceChargeSort(monInterface);
+		monInterface = new InterfaceCharge(monInterface);
 		monInterface = new InterfaceChasseur(monInterface);
 		monInterface = new InterfaceFinirTour(monInterface);
 		monInterface = new InterfaceJouerCarte(monInterface);
