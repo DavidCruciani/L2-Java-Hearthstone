@@ -17,7 +17,7 @@ public class InterfaceJouerCarte extends Interface{
 
 	@Override
 	public String getDescription() {
-		return "Jouer une carte de ta main";
+		return "Mettre une carte en jeu";
 	}
 
 	@Override
@@ -56,7 +56,10 @@ public class InterfaceJouerCarte extends Interface{
 				
 				Plateau.plateau().getJoueurCourant().jouerCarte(carte);
 			}
-			catch (HearthstoneException | IllegalArgumentException e){
+			catch(HearthstoneException e) {
+				System.out.println(e.getMessage());
+			}
+			catch (IllegalArgumentException e){
 				int ent_cible = 0;
 				while (ent_cible != 1 && ent_cible != 2)
 				{

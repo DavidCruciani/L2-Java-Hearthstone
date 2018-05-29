@@ -81,8 +81,7 @@ public class Plateau implements IPlateau{
  * @throws HearthstoneException
  */
 	public void gagnePartie(IJoueur joueur) throws HearthstoneException {
-		// le heros adverse meurt
-		getAdversaire(joueur).getHeros().setVie(0);
+		System.out.println("Le joueur: "+joueur.getPseudo()+", gagne la partie !!!");
 		// fin de la partie
 		partie = false;
 	}
@@ -133,7 +132,7 @@ public class Plateau implements IPlateau{
 	public String toString() {
 		String partie = null;
 		if (this.estDemaree()) {
-			partie = "Partie démarrée\n"+ getJoueurCourant().toString() + " - " +getJoueurCourant().getHeros()+"\n\nVotre main :\n";
+			partie = "\nPartie démarrée\n"+ getJoueurCourant().toString() + " - " +getJoueurCourant().getHeros()+"\n\nVotre main :\n";
 			partie += "######################################################\n";
 			for(ICarte carte: getMainJoueurCourant())
 			{

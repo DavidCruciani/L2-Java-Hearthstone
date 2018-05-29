@@ -69,7 +69,12 @@ public class Joueur implements IJoueur {
 	 */
 	public void finirTour() throws HearthstoneException, CapaciteException {
 		for (ICarte carte : this.enJeu) {
-			carte.executerEffetFinTour();
+			try {
+				carte.executerEffetFinTour();
+			}
+			catch(CapaciteException e) {
+				System.out.println(e.getMessage()+"\n");
+			}
 		}
 	}
 	

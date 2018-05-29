@@ -6,7 +6,7 @@ import carte.Serviteur;
 import plateau.Plateau;
 
 public class InterfaceCharge extends Interface {
-	public final static Console es = new Console();
+	//public final static Console es = new Console();
 	public InterfaceCharge(Interface ihm) {
 		super(ihm);
 	}

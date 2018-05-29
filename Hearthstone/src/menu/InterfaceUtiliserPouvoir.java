@@ -12,7 +12,7 @@ public class InterfaceUtiliserPouvoir extends Interface {
 
 	@Override
 	public String getDescription() {
-		return "Utiliser un pouvoir";
+		return "Utiliser le pouvoir du hero";
 	}
 
 	@Override

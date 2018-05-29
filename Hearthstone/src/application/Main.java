@@ -42,7 +42,7 @@ public class Main {
 		cartesRexxar.add(tirarcanes);
 		ICarte chiens = new Sort ("Lachez les chiens", 3, proprietaire, new InvocationChien("invocation des chiens","invoque autant de chiens que l'adversaire a de cartes en jeu" )); 
 		cartesRexxar.add(chiens);
-		ICarte tuer = new Sort ("Ordre de tuer", 3, proprietaire, new AttaqueCible("Ordre de tuer", "Inflige 3 pts de degats au personnage cible", 3)); 
+		ICarte tuer = new Sort ("Ordre de tuer", 3, proprietaire, new AttaqueCibleSort("Ordre de tuer", "Inflige 3 pts de degats au personnage cible", 3)); 
 		cartesRexxar.add(tuer);
 		ICarte busard = new Serviteur("Busard affamé", 5, proprietaire, 3, 2, new Pioche("Pioche", "Pioche une carte",1) );
 		cartesRexxar.add(busard);
@@ -92,8 +92,24 @@ public class Main {
 	
 	public static void main(String[] args) throws HearthstoneException {
 		// Création des joueurs
-		IJoueur joueur1=new Joueur("Joueur 1 " , new Heros("Rexxar" , new AttaqueHeros ("Tir assuré ","Inflige 2 points de degats au Hero adverse", 2)) );
-		IJoueur joueur2=new Joueur ( "Joueur 2" , new Heros("Jaina",new AttaqueCibleSort("Boule de feu","Inflige 1 point de degat à la cible", 1)));
+		System.out.println("Bonjour ");
+		System.out.println("Il faut un pseudo pour le premier joueur : ");
+		String rep = es.readLine();
+		IJoueur joueur1=new Joueur(rep , new Heros("Rexxar" , new AttaqueHeros ("Tir assuré ","Inflige 2 points de degats au Hero adverse", 2)) );
+		
+		System.out.println("Il faut un pseudo pour le deuxieme joueur : ");
+		rep = es.readLine();
+		IJoueur joueur2=new Joueur ( rep , new Heros("Jaina",new AttaqueCibleSort("Boule de feu","Inflige 1 point de degat à la cible", 1)));
+		
+		while( joueur1.getPseudo().equals(joueur2.getPseudo()) ){
+			System.out.println("\nIl faut un pseudo different pour le premier joueur : ");
+			rep = es.readLine();
+			joueur1=new Joueur(rep , new Heros("Rexxar" , new AttaqueHeros ("Tir assuré ","Inflige 2 points de degats au Hero adverse", 2)) );
+			
+			System.out.println("Il faut un pseudo pour le deuxieme joueur : ");
+			rep = es.readLine();
+			joueur2=new Joueur ( rep , new Heros("Jaina",new AttaqueCibleSort("Boule de feu","Inflige 1 point de degat à la cible", 1)));
+		}
 		
 		((Joueur) joueur1).setDeck(CarteRexxar(joueur1));
 		((Joueur) joueur2).setDeck(CarteJaina(joueur2));
@@ -102,12 +118,12 @@ public class Main {
 		((Joueur) joueur2).getDeck().addAll(CartesNeutres(joueur2));
 		
 		//Test Attaque total
-		ICarte flamme =new Sort("Choc de Flamme ", 7 , joueur1 ,new AttaqueTotale("Attaque massive","inflige 4 pts de dégats a tous les serviteurs adverses ", 4));
+		/*ICarte flamme =new Sort("Choc de Flamme ", 7 , joueur1 ,new AttaqueTotale("Attaque massive","inflige 4 pts de dégats a tous les serviteurs adverses ", 4));
 		((Joueur) joueur1).getMain().add(flamme);
 		ICarte golem = new Serviteur ( "Golem des moissons" , 3 , joueur2 , 2 , 3 , new InvocationServiteur ( "Golemisation " , " Invoque un Golem endomage 2/1" , new Serviteur ( " Serviteur de Golem " , 0 , joueur2 , 2 , 1 ,null)));
 		ICarte gnome = new Serviteur ("Gnôme lépreux " , 1 ,joueur2 , 1 , 1 , new AttaqueHeros ( " Attaque du lépreux " , "Inflige 2 points de dégats au héros " , 2 ));
 		((Joueur) joueur2).getJeu().add(gnome);
-		((Joueur) joueur2).getJeu().add(golem);
+		((Joueur) joueur2).getJeu().add(golem);*/
 		
 		
 		//Test Charge
@@ -158,8 +174,12 @@ public class Main {
 			}
 		
 		Plateau.plateau().demarrerPartie();
-		Plateau.plateau().setJoueurCourant(joueur1);
-		
+		int alea=(int)(Math.random() * 2);
+		//System.out.println("\n"+alea+"\n");
+		if(alea==0)
+			joueur1.prendreTour();
+		if(alea==1)
+			joueur2.prendreTour();		
 		// Création menu
 		ihm = initialiserInterfaces();
 		
@@ -168,7 +188,7 @@ public class Main {
 			System.exit(0);
 		}	
 		
-		while (true) {
+		while (Plateau.plateau().estDemaree()) {
 			
 			/*
 			for (ICarte carte : joueur1.getMain()) {

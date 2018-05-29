@@ -44,12 +44,12 @@ public class AttaqueHeros extends Capacite {
 		if(getDejaUtilise())
 			throw new IllegalArgumentException("Capacite deja utilise");
 		
-		cible=Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getHeros();
+		Heros hero=Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getHeros();
 		
-		if(!(cible instanceof Heros))
+		if(!(hero instanceof Heros))
 			throw new IllegalArgumentException("C'est pas un Heros que tu vise");
-		((Heros)cible).perdreVie(degas);
-		if( ((Heros)cible).estMort()) {
+		((Heros)hero).perdreVie(degas);
+		if( ((Heros)hero).estMort()) {
 			Plateau.plateau().gagnePartie(Plateau.plateau().getJoueurCourant());
 		}
 		setDejaUtilise(true);
