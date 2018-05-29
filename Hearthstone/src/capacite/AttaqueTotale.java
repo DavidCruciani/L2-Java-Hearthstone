@@ -15,11 +15,11 @@ import carte.ICarte;
  * @see Capacite
  */
 public class AttaqueTotale extends Capacite {
-	private int degas;
+	private int degats;
 	
-	public AttaqueTotale(String nom, String description, int degas) {
+	public AttaqueTotale(String nom, String description, int degats) {
 		super(nom, description);
-		this.degas=degas;
+		this.degats=degats;
 	}
 	
 	public void executerAction(Object cible) throws CapaciteException {
@@ -57,7 +57,7 @@ public class AttaqueTotale extends Capacite {
 		ArrayList<ICarte> copieJeu=(ArrayList<ICarte>) Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().clone();
 		for(ICarte carte : copieJeu) {
 			if(carte instanceof Serviteur) {
-				((Serviteur) carte).estAttaquer(degas);
+				((Serviteur) carte).estAttaquer(degats);
 				if( ((Serviteur) carte).disparait() ) {
 					Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).perdreCarte(carte);
 				}

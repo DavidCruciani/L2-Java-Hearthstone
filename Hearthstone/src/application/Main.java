@@ -118,8 +118,8 @@ public class Main {
 		((Joueur) joueur2).getDeck().addAll(CartesNeutres(joueur2));
 		
 		
-		ICarte archimage = new Serviteur ("Archimage" , 6 , joueur1 , 4 ,7 , new Provocation());
-		((Joueur) joueur1).getMain().add(archimage);
+		/*ICarte attaque_mentale= new Sort ( " Attaque mentale " , 2 ,  joueur1 , new AttaqueHeros ( "Attaque mentale " , "Inflige 5 points de dégats au héros " , 5));
+		((Joueur) joueur1).getMain().add(attaque_mentale);*/
 		
 		/*ICarte chasse_marree=new Serviteur ("Chasse marée murloc" , 2, joueur1 , 2 , 1 , new InvocationServiteur ("Cri de guerre" , "Invocation d'un serviteur 1/1" , new Serviteur ("Serviteur de Chasse-maree" , 0 , joueur1 , 1, 1,null)));
 		((Joueur) joueur1).getMain().add(chasse_marree);*/

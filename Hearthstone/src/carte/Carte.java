@@ -30,12 +30,21 @@ public abstract class Carte implements ICarte {
 	}
 	
 	public void setNom(String nom) {
-		this.nom=nom;;
+		if(nom == null)
+			throw new IllegalArgumentException("Le nom doit pas etre nul");
+		if(nom == "") {
+			throw new IllegalArgumentException("Le nom doit pas etre vide");
+		}
+		this.nom=nom;
 	}
 	public void setCout(int cout) {
+		if(cout<0)
+			throw new IllegalArgumentException("Le cout doit etre positif");
 		this.cout=cout;
 	}
 	public void setProprietaire(IJoueur proprietaire) {
+		if(proprietaire==null)
+			throw new IllegalArgumentException("La carte doit avoir un proprietaire");
 		this.proprietaire = proprietaire;
 	}
 	

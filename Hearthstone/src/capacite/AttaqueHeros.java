@@ -14,11 +14,11 @@ import plateau.Plateau;
  */
 public class AttaqueHeros extends Capacite {
 
-	private int degas;
+	private int degats;
 
-	public AttaqueHeros(String nom, String description, int degas) {
+	public AttaqueHeros(String nom, String description, int degats) {
 		super(nom, description);
-		this.degas=degas;
+		this.degats=degats;
 	}
 
 	public void executerAction(Object cible) throws CapaciteException {
@@ -48,7 +48,7 @@ public class AttaqueHeros extends Capacite {
 		
 		if(!(hero instanceof Heros))
 			throw new IllegalArgumentException("C'est pas un Heros que tu vise");
-		((Heros)hero).perdreVie(degas);
+		((Heros)hero).perdreVie(degats);
 		if( ((Heros)hero).estMort()) {
 			Plateau.plateau().gagnePartie(Plateau.plateau().getJoueurCourant());
 		}

@@ -20,7 +20,7 @@ import plateau.Plateau;
 public class Joueur implements IJoueur {
 	private String pseudo;
 	private int mana = 0;
-	private int stockMana = 9;
+	private int stockMana = 0;
 	private ArrayList<ICarte> deck = new ArrayList<ICarte>();
 	private ArrayList<ICarte> main = new ArrayList<ICarte>();
 	private ArrayList<ICarte> enJeu = new ArrayList<ICarte>();
@@ -55,6 +55,8 @@ public class Joueur implements IJoueur {
 	}
 	
 	public void setPseudo(String pseudo) {
+		if(pseudo == null || pseudo=="")
+			throw new IllegalArgumentException("Le pseudo ne peut pas etre nul ou vide");
 		this.pseudo=pseudo;
 	}
 	public void setHero(Heros hero) {
