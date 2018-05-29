@@ -20,7 +20,7 @@ import plateau.Plateau;
 public class Joueur implements IJoueur {
 	private String pseudo;
 	private int mana = 0;
-	private int stockMana = 0;
+	private int stockMana = 9;
 	private ArrayList<ICarte> deck = new ArrayList<ICarte>();
 	private ArrayList<ICarte> main = new ArrayList<ICarte>();
 	private ArrayList<ICarte> enJeu = new ArrayList<ICarte>();
@@ -69,6 +69,8 @@ public class Joueur implements IJoueur {
 	 */
 	public void finirTour() throws HearthstoneException, CapaciteException {
 		for (ICarte carte : this.enJeu) {
+			if(carte.getCapacite()==null)
+				throw new HearthstoneException("Le serviteur n'a pas de Capacite");
 			try {
 				carte.executerEffetFinTour();
 			}
@@ -143,6 +145,9 @@ public class Joueur implements IJoueur {
 				this.getJeu().remove(carte);
 				throw new HearthstoneException("Pas de cible");
 			}
+			catch(CapaciteException e) {
+				System.out.println(e.getMessage());
+			}
 			enJeu.add(carte);
 			main.remove(carte);
 			this.mana -= carte.getCout();
@@ -189,7 +194,12 @@ public class Joueur implements IJoueur {
 		else {
 			if(this.getMana() >= carte.getCout()) {
 				if(carte instanceof Serviteur) {
-					carte.executerEffetDebutMiseEnJeu(cible);
+					try {
+						carte.executerEffetDebutMiseEnJeu(cible);
+					}
+					catch(CapaciteException e) {
+						System.out.println(e.getMessage());
+					}
 					enJeu.add(carte);
 					main.remove(carte);
 					this.mana -= carte.getCout();
@@ -249,10 +259,10 @@ public class Joueur implements IJoueur {
 	 * @throws HearthstoneException 
 	 */
 	public void prendreTour() throws HearthstoneException {
-		if(this.mana + 1 < MAX_MANA) {
-			this.mana ++;
-			this.stockMana = mana;
+		if(this.stockMana + 1 <= MAX_MANA) {
+			this.stockMana ++;
 		}
+		this.mana = stockMana;
 		try {
 			piocher();
 		}

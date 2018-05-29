@@ -100,8 +100,16 @@ public class Serviteur extends Carte{
 	
 	public String toString()
 	{
-		return "Serviteur [ " + super.toString() + ", Capacite " + this.getCapacite() + ", Attaque = " + this.getAttaque() + ", Vie = " + 
-				this.getPointDeVie() + " ] \n" ;
+		String s="Serviteur [ " + super.toString() + ", Capacite " + this.getCapacite() + ", Attaque = " + this.getAttaque() + ", Vie = " + 
+				this.getPointDeVie();
+		if(this.getAttendre())
+			s+=", (en attente)";
+		if(this.getPeutJouer() && getProprietaire().getJeu().contains(this))
+			s+= ", jouable";
+		else if (!this.getPeutJouer() && getProprietaire().getJeu().contains(this))
+			s+=" non jouable";
+		s+="\n";
+		return s;
 	}	
 	
 	/**
@@ -110,57 +118,53 @@ public class Serviteur extends Carte{
 	 * La carte effectue l action que lui confere sa capacite
 	 * si elle n est pas deja utilisee
 	 * @throws HearthstoneException 
+	 * @throws CapaciteException 
 	 */
-	public void executerAction(Object cible) throws HearthstoneException{
+	public void executerAction(Object cible) throws HearthstoneException, CapaciteException{
 		if(this.getAttendre())
 			throw new HearthstoneException("Faut attendre un tour");
+		if(this.getCapacite()==null)
+			throw new CapaciteException("Le serviteur n'a pas de Capacite");
 		
-		try {
-			getCapacite().executerAction(cible);
-		} 
-		catch (CapaciteException e) {
-			System.out.println(e.getMessage());
-			if(this.getPeutJouer()) {
-				if(cible == null)
-					throw new IllegalArgumentException("Ta pas de cible");
-				if(!(cible instanceof Heros) && !(cible instanceof Serviteur))
-					throw new IllegalArgumentException("Tu vise quoi la ? un oiseau ?");
-				if(cible instanceof Heros) {
-					if(aProvocation()) 
-						throw new HearthstoneException("L'adversaire a une provocation");
-			
-					((Heros)cible).perdreVie(attaque);
-					setPeutJouer(false);
-					
-					if( ((Heros)cible).estMort()) {
-						Plateau.plateau().gagnePartie(Plateau.plateau().getJoueurCourant());
-					}
-					
+		if(this.getPeutJouer()) {
+			if(cible == null)
+				throw new IllegalArgumentException("Ta pas de cible");
+			if(!(cible instanceof Heros) && !(cible instanceof Serviteur))
+				throw new IllegalArgumentException("Tu vise quoi la ? un oiseau ?");
+			if(cible instanceof Heros) {
+				if(aProvocation()) 
+					throw new HearthstoneException("L'adversaire a une provocation");
+		
+				((Heros)cible).perdreVie(attaque);
+				setPeutJouer(false);
+				
+				if( ((Heros)cible).estMort()) {
+					Plateau.plateau().gagnePartie(Plateau.plateau().getJoueurCourant());
 				}
-				if(cible instanceof Serviteur) {
-					if(aProvocation()) 
-						if(!( ((Serviteur)cible).getCapacite() instanceof Provocation ) )
-							throw new HearthstoneException("L'adversaire a une provocation");
-					
-					((Serviteur)cible).estAttaquer(attaque);
-					this.estAttaquer(((Serviteur)cible).getAttaque());
-					setPeutJouer(false);
-					
-					if( ((Serviteur)cible).disparait() ) 
-						Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).perdreCarte( ((ICarte)cible) );
-					if(this.disparait())
-						System.out.println("tst");
-						try {
-							Plateau.plateau().getJoueurCourant().perdreCarte((ICarte)this);
-						}
-					catch(HearthstoneException f) {
-						System.out.println(f.getMessage());
+				
+			}
+			if(cible instanceof Serviteur) {
+				if(aProvocation()) 
+					if(!( ((Serviteur)cible).getCapacite() instanceof Provocation ) )
+						throw new HearthstoneException("L'adversaire a une provocation");
+				
+				((Serviteur)cible).estAttaquer(attaque);
+				this.estAttaquer(((Serviteur)cible).getAttaque());
+				setPeutJouer(false);
+				
+				if( ((Serviteur)cible).disparait() ) 
+					Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).perdreCarte( ((ICarte)cible) );
+				if(this.disparait())
+					//System.out.println("tst");
+					try {
+						Plateau.plateau().getJoueurCourant().perdreCarte((ICarte)this);
 					}
+				catch(HearthstoneException f) {
+					System.out.println(f.getMessage());
 				}
 			}
-			else throw new HearthstoneException("Tu la deja joué ce tour ci");
 		}
-		
+		else throw new HearthstoneException("Tu la deja joué ce tour ci");
 	}
 		
 	public boolean aProvocation() throws HearthstoneException {

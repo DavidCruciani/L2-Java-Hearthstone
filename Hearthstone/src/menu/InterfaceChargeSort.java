@@ -30,8 +30,8 @@ public class InterfaceChargeSort extends Interface {
 	@Override
 	public void executerInteraction(Object o) throws Exception {
 		Object cible = null;
-			while (cible == null)
-			{
+			
+			
 				System.out.println("Quelle carte viser ? (un bout de son nom)");
 				String choix = es.readLine();
 				try {
@@ -40,8 +40,9 @@ public class InterfaceChargeSort extends Interface {
 				catch(HearthstoneException e)
 				{
 					System.out.println(e.getMessage());
+					return;
 				}
-			}
+			
 			Plateau.plateau().getJoueurCourant().jouerCarte((ICarte) o, cible);
 		}
 }

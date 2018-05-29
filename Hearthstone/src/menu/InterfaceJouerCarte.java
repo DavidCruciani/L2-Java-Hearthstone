@@ -30,8 +30,6 @@ public class InterfaceJouerCarte extends Interface{
 		
 		Object cible = null;
 		ICarte carte = null;
-		while( carte == null)
-		{
 			System.out.println("Quelle carte jouer ? (un bout de son nom)");
 			String choix = es.readLine();
 			try {
@@ -42,7 +40,7 @@ public class InterfaceJouerCarte extends Interface{
 			{
 				System.out.println(e.getMessage());
 			}
-		}
+		
 		if(carte.getCapacite() instanceof MarqueChasseur) {
 			//System.out.println("on y est____ ou pas... version MC :P");
 			application.Main.ihm.interagir(carte, carte);
@@ -61,13 +59,12 @@ public class InterfaceJouerCarte extends Interface{
 			}
 			catch (IllegalArgumentException e){
 				int ent_cible = 0;
-				while (ent_cible != 1 && ent_cible != 2)
-				{
+				
 					System.out.println("Quelle est votre cible ?\n");
 					System.out.println("1. Le héros\n");
 					System.out.println("2. Une autre carte\n");
 					ent_cible = es.readInt();
-				}
+				
 				if (ent_cible == 1)
 				{
 					cible = Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getHeros();
@@ -76,7 +73,7 @@ public class InterfaceJouerCarte extends Interface{
 					//carte = null;
 					//while (carte == null) {
 						System.out.println("Quelle carte visez-vous ?");
-						String choix = es.readLine();
+						choix = es.readLine();
 						try {
 							cible = Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getCarteEnJeu(choix);
 							//System.out.println(cible.toString());

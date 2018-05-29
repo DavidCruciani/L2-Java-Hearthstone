@@ -29,8 +29,7 @@ public class InterfaceChasseur extends Interface {
 	public void executerInteraction(Object o) throws Exception {
 		
 		Object cible = null;
-		while (cible == null)
-		{
+		
 		//	System.out.println("jeu joueur1 : " + ((Joueur) joueur1).getJeu().size());
 
 			System.out.println("Quelle carte viser ? (un bout de son nom)-- interface chasseur");
@@ -43,7 +42,7 @@ public class InterfaceChasseur extends Interface {
 			{
 				System.out.println(e.getMessage());
 			}
-		}
+		
 		Plateau.plateau().getJoueurCourant().jouerCarte((ICarte) o, cible);
 	}
 

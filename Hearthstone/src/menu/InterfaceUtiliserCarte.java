@@ -33,13 +33,12 @@ public class InterfaceUtiliserCarte extends Interface{
 			try {
 				carte = Plateau.plateau().getJoueurCourant().getCarteEnJeu(choix);
 				int ent_cible = 0;
-				while (ent_cible != 1 && ent_cible != 2)
-				{
+				
 					System.out.println("Quelle est votre cible ?\n");
 					System.out.println("1. Le héros\n");
 					System.out.println("2. Une autre carte\n");
 					ent_cible = es.readInt();
-				}
+			
 				if (ent_cible == 1)
 				{
 					cible = Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getHeros();

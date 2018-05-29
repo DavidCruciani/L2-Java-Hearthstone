@@ -70,6 +70,8 @@ public class Plateau implements IPlateau{
 		if (joueur != courant) throw new HearthstoneException("Joueur non courant");
 		try {
 			joueur.finirTour();
+		} catch (HearthstoneException e) {
+			System.out.println(e.getMessage());
 		} catch (CapaciteException e) {
 			System.out.println(e.getMessage());
 		}

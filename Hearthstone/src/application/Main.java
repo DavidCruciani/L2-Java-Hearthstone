@@ -117,6 +117,13 @@ public class Main {
 		((Joueur) joueur1).getDeck().addAll(CartesNeutres(joueur1));
 		((Joueur) joueur2).getDeck().addAll(CartesNeutres(joueur2));
 		
+		
+		ICarte archimage = new Serviteur ("Archimage" , 6 , joueur1 , 4 ,7 , new Provocation());
+		((Joueur) joueur1).getMain().add(archimage);
+		
+		/*ICarte chasse_marree=new Serviteur ("Chasse marée murloc" , 2, joueur1 , 2 , 1 , new InvocationServiteur ("Cri de guerre" , "Invocation d'un serviteur 1/1" , new Serviteur ("Serviteur de Chasse-maree" , 0 , joueur1 , 1, 1,null)));
+		((Joueur) joueur1).getMain().add(chasse_marree);*/
+		
 		//Test Attaque total
 		/*ICarte flamme =new Sort("Choc de Flamme ", 7 , joueur1 ,new AttaqueTotale("Attaque massive","inflige 4 pts de dégats a tous les serviteurs adverses ", 4));
 		((Joueur) joueur1).getMain().add(flamme);
