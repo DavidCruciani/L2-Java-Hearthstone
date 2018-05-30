@@ -7,7 +7,7 @@ import joueur.IJoueur;
 
 /**
  * Sort est une classe issue de la classe Carte
- * @author David Cruciani
+ * @author David Cruciani, Alexis Nuss
  * @see Carte
  */
 public class Sort extends Carte {
@@ -18,11 +18,6 @@ public class Sort extends Carte {
 		this.setCapacite(capacite);
 	}
 	
-	/*public Sort(Sort sort) {
-		super(sort.getNom(),sort.getCout(),sort.getProprietaire());
-		this.capacite=sort.getCapacite();
-	}*/
-	
 	public ICapacite getCapacite() {
 		return this.capacite;
 	}
@@ -30,10 +25,6 @@ public class Sort extends Carte {
 	public void setCapacite(ICapacite capacite) {
 		this.capacite = capacite;
 	}
-	
-	/*public final ICarte clone (){
-		return new Sort(this);
-	}*/
 	
 	public boolean disparait() {
 		return true;

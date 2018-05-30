@@ -56,9 +56,4 @@ public class MarqueChasseur extends Capacite {
 		}
 	}
 
-	@Override
-	public boolean getBesoinCible() {
-		return true;
-	}
-
 }

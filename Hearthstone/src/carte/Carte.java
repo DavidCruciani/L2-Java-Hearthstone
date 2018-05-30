@@ -4,7 +4,7 @@ import joueur.IJoueur;
 
 /**
  * Carte est une classe representant une carte dans le jeu
- * @author David Cruciani
+ * @author David Cruciani, Alexis Nuss
  *
  */
 
@@ -43,8 +43,6 @@ public abstract class Carte implements ICarte {
 		this.cout=cout;
 	}
 	public void setProprietaire(IJoueur proprietaire) {
-		if(proprietaire==null)
-			throw new IllegalArgumentException("La carte doit avoir un proprietaire");
 		this.proprietaire = proprietaire;
 	}
 	

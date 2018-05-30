@@ -61,8 +61,5 @@ public class AttaqueCibleSort extends Capacite {
 		setDejaUtilise(true);
 			
 	}
-	public boolean getBesoinCible() {
-		return true;
-	}
 
 }

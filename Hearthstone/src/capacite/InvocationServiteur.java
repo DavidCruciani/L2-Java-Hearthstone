@@ -53,8 +53,4 @@ public class InvocationServiteur extends Capacite {
 		Plateau.plateau().getJoueurCourant().getJeu().add(this.getInvocation());
 	}
 
-	@Override
-	public boolean getBesoinCible() {
-		return false;
-	}
 }

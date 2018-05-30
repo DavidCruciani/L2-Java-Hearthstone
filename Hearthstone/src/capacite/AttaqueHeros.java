@@ -55,10 +55,4 @@ public class AttaqueHeros extends Capacite {
 		setDejaUtilise(true);
 	}
 
-	@Override
-	public boolean getBesoinCible() {
-		return false;
-	}
-
-
 }

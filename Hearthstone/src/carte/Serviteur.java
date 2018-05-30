@@ -10,7 +10,7 @@ import plateau.Plateau;
 
 /**
  * Serviteur est une classe issue de la classe Carte
- * @author David Cruciani
+ * @author David Cruciani, Alexis Nuss
  * @see Carte
  */
 public class Serviteur extends Carte{
@@ -79,9 +79,6 @@ public class Serviteur extends Carte{
 		return new Serviteur(this);
 	}
 	
-	/**
-	 * @return true si la vie de la carte est inferieur ou egale a 0
-	 */
 	public boolean disparait() {
 		return this.getPointDeVie()<=0;
 	}
@@ -112,14 +109,6 @@ public class Serviteur extends Carte{
 		return s;
 	}	
 	
-	/**
-	 * @param cible
-	 * 				cible que le joueur veut atteindre
-	 * La carte effectue l action que lui confere sa capacite
-	 * si elle n est pas deja utilisee
-	 * @throws HearthstoneException 
-	 * @throws CapaciteException 
-	 */
 	public void executerAction(Object cible) throws HearthstoneException, CapaciteException{
 		if(this.getAttendre())
 			throw new HearthstoneException("Faut attendre un tour");
@@ -166,7 +155,12 @@ public class Serviteur extends Carte{
 		}
 		else throw new HearthstoneException("Tu la deja joué ce tour ci");
 	}
-		
+	
+	/**
+	 * 
+	 * @return true si l'adversaire a une carte avec la capacite Provocation posé en jeu, false sinon
+	 * @throws HearthstoneException
+	 */
 	public boolean aProvocation() throws HearthstoneException {
 		for(ICarte carte : Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu() ) {
 			if(((Serviteur) carte).getCapacite() instanceof Provocation)

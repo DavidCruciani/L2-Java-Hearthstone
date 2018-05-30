@@ -53,10 +53,4 @@ public class Charge extends Capacite {
 		setDejaUtilise(true);
 	}
 
-
-	@Override
-	public boolean getBesoinCible() {
-		return true;
-	}
-	
 }
