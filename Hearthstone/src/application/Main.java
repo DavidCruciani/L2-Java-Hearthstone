@@ -111,8 +111,16 @@ public class Main {
 			joueur2=new Joueur ( rep , new Heros("Jaina",new AttaqueCibleSort("Boule de feu","Inflige 1 point de degat à la cible", 1)));
 		}
 		
-		((Joueur) joueur1).setDeck(CarteRexxar(joueur1));
-		((Joueur) joueur2).setDeck(CarteJaina(joueur2));
+		try {
+			((Joueur) joueur1).setDeck(CarteRexxar(joueur1));
+		} catch (HearthstoneException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			((Joueur) joueur2).setDeck(CarteJaina(joueur2));
+		} catch (HearthstoneException e1) {
+			e1.printStackTrace();
+		}
 		
 		((Joueur) joueur1).getDeck().addAll(CartesNeutres(joueur1));
 		((Joueur) joueur2).getDeck().addAll(CartesNeutres(joueur2));
@@ -213,6 +221,7 @@ public class Main {
 			//System.out.println("jeu joueur1 : " + ((Joueur) joueur1).getJeu().size());
 
 			String choix = menu();
+			System.out.println(choix);
 			try {
 				ihm.interagir(choix, Plateau.plateau());
 			} catch (Exception e) {

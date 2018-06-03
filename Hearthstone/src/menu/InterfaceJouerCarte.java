@@ -4,6 +4,7 @@ import plateau.Plateau;
 import capacite.Charge;
 import capacite.MarqueChasseur;
 import carte.ICarte;
+import exception.CapaciteException;
 import exception.HearthstoneException;
 import menu.Console;
 
@@ -84,7 +85,12 @@ public class InterfaceJouerCarte extends Interface{
 						}
 					//}
 				}
+				try {
 				Plateau.plateau().getJoueurCourant().jouerCarte(carte, cible);
+				}
+				catch(HearthstoneException | CapaciteException g) {
+					System.out.println(g.getMessage());
+				}
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 package menu;
 
+import exception.CapaciteException;
 import exception.HearthstoneException;
 import plateau.Plateau;
 
@@ -59,7 +60,7 @@ public class InterfaceUtiliserPouvoir extends Interface {
 			try {		
 				Plateau.plateau().getJoueurCourant().utiliserPouvoir(cible);
 			}
-			catch(HearthstoneException f) {
+			catch(HearthstoneException | IllegalArgumentException | CapaciteException f) {
 				System.out.println(f.getMessage());
 			}
 		}

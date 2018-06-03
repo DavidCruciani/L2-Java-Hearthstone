@@ -147,7 +147,7 @@ public class Joueur implements IJoueur {
 				this.getJeu().remove(carte);
 				throw new HearthstoneException("Pas de cible");
 			}
-			catch(CapaciteException e) {
+			catch(CapaciteException | IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}
 			enJeu.add(carte);
@@ -169,7 +169,7 @@ public class Joueur implements IJoueur {
 				this.mana -= carte.getCout();
 				main.remove(carte);
 			}
-			catch (HearthstoneException e) {
+			catch (HearthstoneException | IllegalArgumentException e) {
 				this.mana = this.mana + carte.getCout();
 				this.main.add(carte);
 				throw new HearthstoneException("Pas de cible");
@@ -199,7 +199,7 @@ public class Joueur implements IJoueur {
 					try {
 						carte.executerEffetDebutMiseEnJeu(cible);
 					}
-					catch(CapaciteException e) {
+					catch(CapaciteException | IllegalArgumentException e) {
 						System.out.println(e.getMessage());
 					}
 					enJeu.add(carte);
@@ -212,7 +212,7 @@ public class Joueur implements IJoueur {
 						this.mana -= carte.getCout();
 						main.remove(carte);
 					}
-					catch (HearthstoneException e) {
+					catch (HearthstoneException | IllegalArgumentException e) {
 						this.mana = this.mana + carte.getCout();
 						this.main.add(carte);
 						throw new HearthstoneException("Pas de cible");
