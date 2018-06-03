@@ -5,7 +5,13 @@ import carte.ICarte;
 import carte.Sort;
 import exception.HearthstoneException;
 import plateau.Plateau;
-
+/**
+ * Cette classe permet d'executer la capacité MarqueChasseur sur une carte en jeu de l'aversaire
+ * Demande une cible
+ * @author David Cruciani, Alexis Nuss
+ * @see MarqueChasseur
+ *
+ */
 public class InterfaceChasseur extends Interface {
 	public final static Console es = new Console();
 	public InterfaceChasseur(Interface ihm) {

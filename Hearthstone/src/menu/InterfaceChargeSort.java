@@ -5,7 +5,11 @@ import carte.ICarte;
 import carte.Sort;
 import exception.HearthstoneException;
 import plateau.Plateau;
-
+/**
+ * Permet d'executer un sort sur une carte en jeu du joueur courant
+ * @author David Cruciani, Alexis Nuss
+ *
+ */
 public class InterfaceChargeSort extends Interface {
 	
 	public final static Console es = new Console();

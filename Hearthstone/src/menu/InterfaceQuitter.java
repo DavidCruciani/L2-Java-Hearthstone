@@ -1,7 +1,11 @@
 package menu;
 
 import plateau.Plateau;
-
+/**
+ * Permet de quitter la partie en cours
+ * @author David Cruciani, Alexis Nuss
+ *
+ */
 public class InterfaceQuitter extends Interface {
 	public final static Console es = new Console();
 	

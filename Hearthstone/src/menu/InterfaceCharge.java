@@ -4,7 +4,12 @@ import capacite.Charge;
 import carte.ICarte;
 import carte.Serviteur;
 import plateau.Plateau;
-
+/**
+ * Permet d'executer la capacité Charge sur une carte passée en paramètre 
+ * @author David Cruciani, Alexis Nuss
+ * @see Charge 
+ *
+ */
 public class InterfaceCharge extends Interface {
 	//public final static Console es = new Console();
 	public InterfaceCharge(Interface ihm) {

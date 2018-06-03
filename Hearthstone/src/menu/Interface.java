@@ -1,7 +1,9 @@
 package menu;
 
 public abstract class Interface {
-
+	/**
+	 * Cette classe permet de gérer les interactions possibles dans le jeu
+	 */
 	private	Interface	suivant = null;
 	
 	public Interface(Interface ihm) {

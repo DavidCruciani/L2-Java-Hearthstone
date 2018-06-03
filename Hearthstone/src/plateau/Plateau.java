@@ -8,9 +8,8 @@ import exception.HearthstoneException;
 import java.lang.Math;
 import joueur.IJoueur;
 /**
- * 
- * @author Alexis
  * Cette classe gère le plateau : joueur courant, adversaire, début et fin de partie
+ * @author David Cruciani, Alexis Nuss
  *
  */
 public class Plateau implements IPlateau{

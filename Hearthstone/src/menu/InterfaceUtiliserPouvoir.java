@@ -3,7 +3,11 @@ package menu;
 import exception.CapaciteException;
 import exception.HearthstoneException;
 import plateau.Plateau;
-
+/**
+ * Permet d'utiliser le pouvoir du héros sur le héros adverse ou sur une autre carte de l'adversaire
+ * @author David Cruciani, Alexis Nuss
+ *
+ */
 public class InterfaceUtiliserPouvoir extends Interface {
 
 	public final static Console es = new Console();

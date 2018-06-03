@@ -7,7 +7,12 @@ import carte.ICarte;
 import exception.CapaciteException;
 import exception.HearthstoneException;
 import menu.Console;
-
+/**
+ * Permet de jouer une carte de sa main
+ * @author David Cruciani, Alexis Nuss
+ * @see jouerCarte 
+ *
+ */
 
 public class InterfaceJouerCarte extends Interface{
 

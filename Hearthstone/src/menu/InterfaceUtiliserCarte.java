@@ -5,7 +5,11 @@ import exception.CapaciteException;
 import exception.HearthstoneException;
 import plateau.Plateau;
 import menu.Console;
-
+/**
+ * Permet d'utiliser une carte en jeu sur une cible au choix (héros ou carte particulière de l'adversaire)
+ * @author David Cruciani, Alexis Nuss
+ *
+ */
 public class InterfaceUtiliserCarte extends Interface{
 	public final static Console es = new Console();
 

@@ -3,7 +3,11 @@ package menu;
 import menu.Console;
 import menu.Interface;
 import plateau.Plateau;
-
+/**
+ * Cette classe permet de finir le tour (en cours) du joueur (courant)
+ * @author David Cruciani, Alexis Nuss
+ *
+ */
 public class InterfaceFinirTour extends Interface {
 
 	public final static Console es = new Console();
