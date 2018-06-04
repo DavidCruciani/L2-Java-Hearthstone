@@ -20,7 +20,7 @@ import plateau.Plateau;
 public class Joueur implements IJoueur {
 	private String pseudo;
 	private int mana = 0;
-	private int stockMana = 2;
+	private int stockMana = 0;
 	private ArrayList<ICarte> deck = new ArrayList<ICarte>();
 	private ArrayList<ICarte> main = new ArrayList<ICarte>();
 	private ArrayList<ICarte> enJeu = new ArrayList<ICarte>();

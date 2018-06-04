@@ -3,6 +3,7 @@ package menu;
 import capacite.MarqueChasseur;
 import carte.ICarte;
 import carte.Sort;
+import exception.CapaciteException;
 import exception.HearthstoneException;
 import plateau.Plateau;
 /**
@@ -49,7 +50,11 @@ public class InterfaceChasseur extends Interface {
 				System.out.println(e.getMessage());
 			}
 		
-		Plateau.plateau().getJoueurCourant().jouerCarte((ICarte) o, cible);
+			try {
+				Plateau.plateau().getJoueurCourant().jouerCarte((ICarte) o, cible);
+			} catch (HearthstoneException | CapaciteException e) {
+				System.out.println(e.getMessage());
+			}
 	}
 
 }

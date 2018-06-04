@@ -93,7 +93,7 @@ public class InterfaceJouerCarte extends Interface{
 				try {
 				Plateau.plateau().getJoueurCourant().jouerCarte(carte, cible);
 				}
-				catch(HearthstoneException | CapaciteException g) {
+				catch(CapaciteException g) {
 					System.out.println(g.getMessage());
 				}
 			}

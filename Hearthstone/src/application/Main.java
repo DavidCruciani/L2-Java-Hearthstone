@@ -191,10 +191,20 @@ public class Main {
 		Plateau.plateau().demarrerPartie();
 		int alea=(int)(Math.random() * 2);
 		//System.out.println("\n"+alea+"\n");
-		if(alea==0)
-			joueur1.prendreTour();
-		if(alea==1)
-			joueur2.prendreTour();		
+		if(alea==0) {
+			try {
+				joueur1.prendreTour();
+			} catch (HearthstoneException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		if(alea==1) {
+			try {
+				joueur2.prendreTour();
+			} catch (HearthstoneException e) {
+				System.out.println(e.getMessage());
+			}	
+		}
 		// Création menu
 		ihm = initialiserInterfaces();
 		
