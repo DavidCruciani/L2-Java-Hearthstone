@@ -3,7 +3,6 @@ package capacite;
 /**
  * Capacite est une classe representant les actions que pourra faire la carte qui la possede
  * @author David Cruciani
- * @see Carte
  */
 public abstract class Capacite implements ICapacite {
 	private String nom;

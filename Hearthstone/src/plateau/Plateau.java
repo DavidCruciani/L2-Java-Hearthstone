@@ -163,14 +163,24 @@ public class Plateau implements IPlateau{
 			partie = "Cette partie n'est pas demarrée";
 		return partie;
 	}
-	
+	/**
+	 * 
+	 * @return la liste des joueurs
+	 */
 	public ArrayList<IJoueur> getJoueurs(){
 		return this.joueurs;
 	}
-	
+	/**
+	 * 
+	 * @return la main du joueur courant
+	 */
 	public ArrayList<ICarte> getMainJoueurCourant(){
 		return this.getJoueurCourant().getMain();
 	}
+	/**
+	 * 
+	 * @return Le jeu de l'adversaire
+	 */
 	public ArrayList<ICarte> getJeuAdversaire(){
 		try {
 			return this.getAdversaire(getJoueurCourant()).getJeu();

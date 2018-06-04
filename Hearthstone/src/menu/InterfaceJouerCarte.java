@@ -10,7 +10,6 @@ import menu.Console;
 /**
  * Permet de jouer une carte de sa main
  * @author David Cruciani, Alexis Nuss
- * @see jouerCarte 
  *
  */
 
