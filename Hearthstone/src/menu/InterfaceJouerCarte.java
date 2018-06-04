@@ -48,22 +48,26 @@ public class InterfaceJouerCarte extends Interface{
 			}
 		
 		if(carte.getCapacite() instanceof MarqueChasseur) {
-			//System.out.println("on y est____ ou pas... version MC :P");
-			application.Main.ihm.interagir(carte, carte);
+			try {
+				application.Main.ihm.interagir(carte, carte);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
 		}
 		else if (carte.getCapacite() instanceof Charge ) {
-			//System.out.println("on y est____ ou pas... :P");
-			application.Main.ihm.interagir(carte, carte);
+			try {
+				application.Main.ihm.interagir(carte, carte);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
 		}
 		else {
 			try {
 				
 				Plateau.plateau().getJoueurCourant().jouerCarte(carte);
 			}
-			catch(HearthstoneException e) {
-				System.out.println(e.getMessage());
-			}
-			catch (IllegalArgumentException e){
+			catch (HearthstoneException e){
 				int ent_cible = 0;
 				
 					System.out.println("Quelle est votre cible ?\n");
@@ -76,19 +80,15 @@ public class InterfaceJouerCarte extends Interface{
 					cible = Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getHeros();
 				}
 				else {
-					//carte = null;
-					//while (carte == null) {
 						System.out.println("Quelle carte visez-vous ?");
 						choix = es.readLine();
 						try {
 							cible = Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getCarteEnJeu(choix);
-							//System.out.println(cible.toString());
 						}
 						catch(HearthstoneException f)
 						{
 							System.out.println(f.getMessage());
 						}
-					//}
 				}
 				try {
 				Plateau.plateau().getJoueurCourant().jouerCarte(carte, cible);

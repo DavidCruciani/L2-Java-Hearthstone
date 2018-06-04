@@ -81,7 +81,7 @@ public class Plateau implements IPlateau{
  * @param joueur
  * @throws HearthstoneException
  */
-	public void gagnePartie(IJoueur joueur) throws HearthstoneException {
+	public void gagnePartie(IJoueur joueur) {
 		System.out.println(Plateau.plateau().toString());
 		System.out.println("Le joueur: "+joueur.getPseudo()+", gagne la partie !!!");
 		// fin de la partie

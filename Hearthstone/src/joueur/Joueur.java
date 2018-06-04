@@ -20,7 +20,7 @@ import plateau.Plateau;
 public class Joueur implements IJoueur {
 	private String pseudo;
 	private int mana = 0;
-	private int stockMana = 0;
+	private int stockMana = 2;
 	private ArrayList<ICarte> deck = new ArrayList<ICarte>();
 	private ArrayList<ICarte> main = new ArrayList<ICarte>();
 	private ArrayList<ICarte> enJeu = new ArrayList<ICarte>();
@@ -141,13 +141,13 @@ public class Joueur implements IJoueur {
 			try {
 				carte.executerEffetDebutMiseEnJeu(null);
 			}
-			catch (HearthstoneException e) {
+			catch ( IllegalArgumentException e) {
 				this.mana = this.mana + carte.getCout();
 				this.main.add(carte);
 				this.getJeu().remove(carte);
 				throw new HearthstoneException("Pas de cible");
 			}
-			catch(CapaciteException | IllegalArgumentException e) {
+			catch(CapaciteException | HearthstoneException e) {
 				System.out.println(e.getMessage());
 			}
 			enJeu.add(carte);
@@ -165,9 +165,11 @@ public class Joueur implements IJoueur {
 		}
 		else if(carte instanceof Sort){
 			try {
-				carte.executerEffetDebutMiseEnJeu(null);
 				this.mana -= carte.getCout();
 				main.remove(carte);
+				
+				carte.executerEffetDebutMiseEnJeu(null);
+			
 			}
 			catch (HearthstoneException | IllegalArgumentException e) {
 				this.mana = this.mana + carte.getCout();
@@ -208,12 +210,12 @@ public class Joueur implements IJoueur {
 				}
 				else if(carte instanceof Sort){
 					try {
-						carte.executerEffetDebutMiseEnJeu(cible);
 						this.mana -= carte.getCout();
 						main.remove(carte);
+						carte.executerEffetDebutMiseEnJeu(cible);
 					}
 					catch (HearthstoneException | IllegalArgumentException e) {
-						this.mana = this.mana + carte.getCout();
+						this.mana += carte.getCout();
 						this.main.add(carte);
 						throw new HearthstoneException("Pas de cible");
 					}

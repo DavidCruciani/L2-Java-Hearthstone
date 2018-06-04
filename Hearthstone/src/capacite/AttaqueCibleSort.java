@@ -33,7 +33,7 @@ public class AttaqueCibleSort extends Capacite {
 	
 	}
 
-	public void executerEffetMiseEnJeu(Object cible) throws CapaciteException, HearthstoneException {
+	public void executerEffetMiseEnJeu(Object cible) throws CapaciteException {
 
 		if(cible == null)
 			throw new IllegalArgumentException("Ta pas de cible");
