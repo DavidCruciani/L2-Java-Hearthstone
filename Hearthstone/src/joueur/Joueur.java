@@ -10,11 +10,10 @@ import exception.HearthstoneException;
 import heros.Heros;
 import plateau.Plateau;
 
-/* revoir quand plateau fait */
 
 /**
  * Joueur est une classe representant un joueur physique dans le jeu
- * @author David Cruciani
+ * @author David Cruciani, Alexis Nuss
  */
 
 public class Joueur implements IJoueur {
@@ -63,12 +62,6 @@ public class Joueur implements IJoueur {
 		this.hero=hero;
 	}
 
-	/**
-	 * Le joueur a fait toute les actions qu il a souhaite et passe la main a l adversaire
-	 * les capacites de fin de tour des cartes posees en jeu sont activees
-	 * @throws HearthstoneException 
-	 * @throws CapaciteException 
-	 */
 	public void finirTour() throws HearthstoneException, CapaciteException {
 		for (ICarte carte : this.enJeu) {
 			if(carte.getCapacite()==null)
@@ -92,11 +85,6 @@ public class Joueur implements IJoueur {
 
 	}
 
-	/**
-	 * @param nomCarte
-	 * 				  nom de la carte qu on veut recuperer
-	 * @return la carte souhaite si elle existe bien sur le plateau
-	 */
 	public ICarte getCarteEnJeu(String nomCarte) throws HearthstoneException {
 			//System.out.println("= getCarteEnJeu ==============================================");
 			//System.out.println("nomCarte : " + nomCarte + "this.enJeu : " + this.enJeu.size());
@@ -114,11 +102,6 @@ public class Joueur implements IJoueur {
 			throw new HearthstoneException("Carte pas en Jeu");
 	}
 
-	/**
-	 * @param nomCarte
-	 * 				  nom de la carte qu on veut recuperer
-	 * @return la carte souhaite si elle existe bien dans la main du joueur
-	 */
 	public ICarte getCarteEnMain(String nomCarte) throws HearthstoneException {
 		for (ICarte carte : this.main) {
 			if(carte.getNom().contains(nomCarte)) 
@@ -127,13 +110,6 @@ public class Joueur implements IJoueur {
 		throw new HearthstoneException("Carte pas en Main");
 	}
 
-	/**
-	 * @param carte
-	 * 				nom de la carte qu on veut jouer
-	 * le joueur pose la carte de sa main sur le plateau 
-	 * si elle existe bien dans sa main et si il a le mana pour le faire
-	 * @throws CapaciteException 
-	 */
 	public void jouerCarte(ICarte carte) throws HearthstoneException, CapaciteException {
 		if(!main.contains(carte)) throw new HearthstoneException("Carte pas en Main");
 		if(!(this.getMana() >= carte.getCout())) throw new HearthstoneException("Pas mana");
@@ -182,16 +158,6 @@ public class Joueur implements IJoueur {
 		
 	}
 
-	/**
-	 * @param carte
-	 * 				nom de la carte qu on veut jouer
-	 * @param cible
-	 * 				cible que l on veut atteindre par la capacite de mise en jeu
-	 * le joueur pose la carte de sa main sur le plateau 
-	 * si elle existe bien dans sa main et si il a le mana pour le faire
-	 * et active sa capacite de mise en jeu sur la cible choisie
-	 * @throws CapaciteException 
-	 */
 	public void jouerCarte(ICarte carte, Object cible) throws HearthstoneException, CapaciteException {
 		if(! main.contains(carte) )
 			throw new HearthstoneException("Carte pas en Main");
@@ -226,11 +192,6 @@ public class Joueur implements IJoueur {
 		}
 	}
 
-	/**
-	 * @param carte
-	 * 				nom de la carte choisie
-	 * retire du plateau la carte choisie si elle existe bien sur le plateau
-	 */
 	public void perdreCarte(ICarte carte) throws HearthstoneException {
 		if(enJeu.contains(carte)) {
 			try {
@@ -245,9 +206,6 @@ public class Joueur implements IJoueur {
 			throw new HearthstoneException("Carte pas en Jeu");
 	}
 
-	/**
-	 * Donnne une carte du deck pour la mettre dans la main du joueur
-	 */
 	public void piocher() throws HearthstoneException {
 		if(deck.size() > 0) {
 			int alea=(int)(Math.random() * deck.size());
@@ -258,10 +216,6 @@ public class Joueur implements IJoueur {
 			throw new HearthstoneException("Deck vide tu peux plus piocher");
 	}
 
-	/**
-	 * Le joueur commence a jouer son tour
-	 * @throws HearthstoneException 
-	 */
 	public void prendreTour() throws HearthstoneException {
 		if(this.stockMana + 1 <= MAX_MANA) {
 			this.stockMana ++;
@@ -282,21 +236,11 @@ public class Joueur implements IJoueur {
 		
 	}
 
-	/**
-	 * @param carte
-	 * 				carte que le joueur souhaite utiliser
-	 * @param cible
-	 * 				cible que le joueur veut atteindre
-	 * utilise la capacite de la carte si elle est bien sur le plateau
-	 * @throws CapaciteException 
-	 * @throws HearthstoneException 
-	 */
 	public void utiliserCarte(ICarte carte, Object cible) throws HearthstoneException, CapaciteException {
 		if(enJeu.contains(carte)) {
 				carte.executerAction(cible);
 			}
 	}
-
 
 	public void utiliserPouvoir(Object cible) throws HearthstoneException, CapaciteException{
 		if(hero.getPouvoir() != null) {
