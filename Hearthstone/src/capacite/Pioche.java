@@ -7,7 +7,7 @@ import plateau.Plateau;
 /**
  * Pioche est une classe issue de la classe Capacite
  * Cette capacite permet au joueur qui la met en jeu de piocher une ou plusieurs carte
- * @author David Cruciani
+ * @author David Cruciani, Alexis Nuss
  * @see Capacite
  */
 public class Pioche extends Capacite {

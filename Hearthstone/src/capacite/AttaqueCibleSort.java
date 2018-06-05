@@ -7,6 +7,14 @@ import exception.HearthstoneException;
 import heros.Heros;
 import plateau.Plateau;
 
+/**
+ * AttaqueCibleSort est une classe issue de la classe Capacite
+ * Cette capacite permet au serviteur d attaquer une cible adverse, le Hero ou un serviteur
+ * meme si celui ci possede une provocation en jeu
+ * @author David Cruciani, Alexis Nuss
+ * @see Capacite
+ */
+
 public class AttaqueCibleSort extends Capacite {
 	private int degats;
 

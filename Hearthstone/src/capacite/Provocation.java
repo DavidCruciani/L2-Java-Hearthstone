@@ -5,7 +5,7 @@ import exception.CapaciteException;
 /**
  * Provocation est une classe issue de la classe Capacite
  * Cette capacite permet au serviteur cible d etre cible par toute les attaques de l adversaire
- * @author David Cruciani
+ * @author David Cruciani, Alexis Nuss
  * @see Capacite
  */
 public class Provocation extends Capacite {

@@ -7,7 +7,7 @@ import exception.HearthstoneException;
 /**
  * Charge est une classe issue de la classe Capacite
  * Cette capacite permet au serviteur cible de ne pas attendre pour attaquer lors de sa mise en jeu
- * @author David Cruciani
+ * @author David Cruciani, Alexis Nuss
  * @see Capacite
  */
 

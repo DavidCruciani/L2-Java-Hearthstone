@@ -8,7 +8,7 @@ import plateau.Plateau;
 /**
  * InvocationServiteur classe issue de Capacite
  * invoque un serviteur sur le plateau
- * @author David Cruciani
+ * @author David Cruciani, Alexis Nuss
  * @see Capacite
  */
 public class InvocationServiteur extends Capacite {

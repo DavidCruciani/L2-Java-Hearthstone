@@ -8,7 +8,7 @@ import plateau.Plateau;
  /**
   * MarqueChasseur est une classe issue de Capacite
   * Met la vie d'un serviteur adverse en jeu a 1
-  * @author David Cruciani
+  * @author David Cruciani, Alexis Nuss
   * @see Capacite
   */
 public class MarqueChasseur extends Capacite {

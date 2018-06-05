@@ -9,7 +9,7 @@ import plateau.Plateau;
 /**
  * EffetPermanent est une classe issue de la classe Capacite
  * Cette capacite permet au serviteur cible de percevoir un bonus d attaque et de vie
- * @author David Cruciani
+ * @author David Cruciani,Alexis Nuss
  * @see Capacite
  */
 public class EffetPermanent extends Capacite {

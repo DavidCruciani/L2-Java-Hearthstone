@@ -9,7 +9,7 @@ import capacite.Charge;
 /**
  * InvocationChien est une classe issue de InvocationServiteur
  * invoque des chiens en fonction du nombre de serviteur adverse en jeu
- * @author David Cruciani
+ * @author David Cruciani, Alexis Nuss
  * @see InvocationServiteur
  */
 public class InvocationChien extends InvocationServiteur{

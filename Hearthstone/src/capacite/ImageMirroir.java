@@ -7,7 +7,7 @@ import plateau.Plateau;
 /**
  * ImageMirroir est une classe issue de InvocationServiteur
  * invoque deux serviteurs 
- * @author David Cruciani
+ * @author David Cruciani,Alexis Nuss
  * @see InvocationServiteur
  */
 public class ImageMirroir extends InvocationServiteur {

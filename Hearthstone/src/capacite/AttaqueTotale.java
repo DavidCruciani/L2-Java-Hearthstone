@@ -11,7 +11,7 @@ import carte.ICarte;
 /**
  * AttaqueTotale est une classe issue de la classe Capacite
  * Cette capacite permet au serviteur cible d attaquer tout les serviteurs adverse pose sur le plateau
- * @author David Cruciani
+ * @author David Cruciani, Alexis Nuss
  * @see Capacite
  */
 public class AttaqueTotale extends Capacite {
