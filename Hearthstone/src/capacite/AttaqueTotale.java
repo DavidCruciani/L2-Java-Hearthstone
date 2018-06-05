@@ -44,15 +44,6 @@ public class AttaqueTotale extends Capacite {
 	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
 		if(getDejaUtilise())
 			throw new IllegalArgumentException("Capacite deja utilise");
-		/*for(int i=0;i<Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().size();i++ ){
-			((Serviteur) Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().get(i)).estAttaquer(degas);
-		}
-		
-		for(int i=1; i<Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().size();i-- ){
-			if( ((Serviteur) Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().get(i)).disparait() ) {
-				Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).perdreCarte(Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().get(i));
-			}
-		}*/
 		
 		ArrayList<ICarte> copieJeu=(ArrayList<ICarte>) Plateau.plateau().getAdversaire(Plateau.plateau().getJoueurCourant()).getJeu().clone();
 		for(ICarte carte : copieJeu) {
