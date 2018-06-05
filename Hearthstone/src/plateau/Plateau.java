@@ -8,7 +8,7 @@ import exception.HearthstoneException;
 import java.lang.Math;
 import joueur.IJoueur;
 /**
- * Cette classe gère le plateau : joueur courant, adversaire, début et fin de partie
+ * Cette classe gère le plateau implémentation de IPlateau
  * @author David Cruciani, Alexis Nuss
  *
  */
@@ -32,20 +32,13 @@ public class Plateau implements IPlateau{
 			plateau=new Plateau();
 		return plateau;
 	}
-	/**
-	 * Ajoute un joueur à la partie
-	 * @param joueur
-	 * @throws HearthstoneException
-	 * 
-	 */
+
 	public void ajouterJoueur(IJoueur joueur) throws HearthstoneException {
 		if (joueur == null) throw new HearthstoneException("Joueur vide");
 		if  (joueurs.size() == 2) throw new HearthstoneException("Dejà deux joueurs");
 		joueurs.add(joueur);
 	}
-	/**
-	 * Après vérification du nombre de joueur, démarrage de la partie
-	 */
+
 	public void demarrerPartie() throws HearthstoneException {
 		if (joueurs.isEmpty()) throw new HearthstoneException("Il n'y a pas de joueur");
 		if  (joueurs.get(1) == null) throw new HearthstoneException("1 seul joueur");
@@ -76,11 +69,7 @@ public class Plateau implements IPlateau{
 		}
 		this.getAdversaire(joueur).prendreTour();
 	}
-/**
- * Terminer la partie, le heros de l'adversaire meurt
- * @param joueur
- * @throws HearthstoneException
- */
+
 	public void gagnePartie(IJoueur joueur) {
 		System.out.println(Plateau.plateau().toString());
 		System.out.println("Le joueur: "+joueur.getPseudo()+", gagne la partie !!!");
@@ -88,12 +77,7 @@ public class Plateau implements IPlateau{
 		partie = false;
 	}
 
-/**
- * Retourne l'adversaire du joueur actuel (passé en paramètre)
- * @param joueur
- * @return Adversaire
- * @throws HearthstoneException
- */
+
 	public IJoueur getAdversaire(IJoueur joueur) throws HearthstoneException {
 		if (joueur == null) throw new HearthstoneException("Joueur ne peut être vide");
 		if (!joueurs.contains(joueur)) throw new HearthstoneException("Joueur inconnu");
@@ -106,21 +90,14 @@ public class Plateau implements IPlateau{
 			return joueurs.get(0);
 	}
 
-/**
- * Joueur courant
- * @return le joueur courant
- */
+
 	public IJoueur getJoueurCourant() {
 		if (partie == true)
 			return courant;
 		else
 			return null;
 	}
-/**
- * Met en place le joueur courant ou mise à jour
- * @param joueur
- * @throws HearthstoneException
- */
+
 	public void setJoueurCourant(IJoueur joueur) throws HearthstoneException {
 		if (partie == false) throw new HearthstoneException("Partie non commencée");
 		if (joueur == null) throw new HearthstoneException("Joueur ne peut être vide");
